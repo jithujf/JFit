@@ -26,81 +26,81 @@ const TODAY = new Date().toISOString().split('T')[0];
 
 // ─── EXERCISES ────────────────────────────────────────────────
 const EX=[
-  {id:"c1",name:"Machine Chest Press",muscle:"Chest",eq:"Machine",cues:["Seat height: handles at mid-chest","Drive elbows slightly down, not flared 90°","Full extension but don't lock out","Slow 2-sec negative"],yt:"https://www.youtube.com/watch?v=xUm0BiZCX_I"},
-  {id:"c2",name:"Incline Machine Chest Press",muscle:"Chest",eq:"Machine",cues:["Set incline 30–45°","Upper chest focus — feel the squeeze at top","Don't let shoulders roll forward","Control the weight down"],yt:"https://www.youtube.com/watch?v=kFNIBz5FsbI"},
-  {id:"c3",name:"Flat Machine Press",muscle:"Chest",eq:"Machine",cues:["Chest up, slight arch","Push through chest not shoulders","Pause 1 sec at peak contraction","Return slowly under control"],yt:"https://www.youtube.com/watch?v=xUm0BiZCX_I"},
-  {id:"c4",name:"Pec Deck Fly",muscle:"Chest",eq:"Machine",cues:["Elbows slightly bent throughout","Think hugging a barrel","Squeeze hard at the centre","Don't go past shoulder line on way back"],yt:"https://www.youtube.com/watch?v=Z57CtFmRMxA"},
-  {id:"c5",name:"Cable Chest Fly (Low to High)",muscle:"Chest",eq:"Cable",cues:["Cables set at lowest position","Arc up and in toward upper chest","Slight forward lean","Feel the stretch at the bottom"],yt:"https://www.youtube.com/watch?v=PPdoAkIBxEc"},
-  {id:"c6",name:"Cable Chest Fly (High to Low)",muscle:"Chest",eq:"Cable",cues:["Cables set at highest position","Arc down toward lower chest","Keep soft bend in elbows","Control the negative"],yt:"https://www.youtube.com/watch?v=taI4XduLpTk"},
-  {id:"c7",name:"Dumbbell Flat Bench Press",muscle:"Chest",eq:"Dumbbell",cues:["Dumbbells touch at top","Lower to chest level","Feet flat on floor","Arch naturally"],yt:"https://www.youtube.com/watch?v=VmB1G1K7v94"},
-  {id:"c8",name:"Dumbbell Incline Press",muscle:"Chest",eq:"Dumbbell",cues:["30–45° incline","Upper chest focus","Don't flare elbows too wide","Full range of motion"],yt:"https://www.youtube.com/watch?v=8iPEnn-ltC8"},
-  {id:"c9",name:"Dumbbell Fly",muscle:"Chest",eq:"Dumbbell",cues:["Soft bend in elbows","Wide arc down — feel the stretch","Squeeze at top","Don't go too heavy"],yt:"https://www.youtube.com/watch?v=eozdVDA78K0"},
-  {id:"c10",name:"Push Up",muscle:"Chest",eq:"Bodyweight",cues:["Hands slightly wider than shoulders","Body straight","Lower chest close to floor","Elbows at 45°"],yt:"https://www.youtube.com/watch?v=IODxDxX7oi4"},
-  {id:"c11",name:"Barbell Bench Press",muscle:"Chest",eq:"Barbell",cues:["Grip just outside shoulder width","Bar touches lower chest","Leg drive into floor","Retract shoulder blades"],yt:"https://www.youtube.com/watch?v=rT7DgCr-3pg"},
-  {id:"c12",name:"Dips (Chest Focus)",muscle:"Chest",eq:"Bodyweight",cues:["Lean forward 30°","Elbows flare slightly out","Lower until shoulder stretch","Don't lock out elbows"],yt:"https://www.youtube.com/watch?v=2z8JmcrW-As"},
-  {id:"b1",name:"Lat Pulldown Wide Grip",muscle:"Back",eq:"Cable",cues:["Pull to upper chest","Lead with elbows driving down","Lean back slightly 10–15°","Squeeze lats at bottom"],yt:"https://www.youtube.com/watch?v=CAwf7n6Luuc"},
-  {id:"b2",name:"Close Grip Lat Pulldown",muscle:"Back",eq:"Cable",cues:["Neutral grip","Elbows drive straight down","Feel lats stretch at top","Full extension between reps"],yt:"https://www.youtube.com/watch?v=gUkQh8j50cA"},
-  {id:"b3",name:"Seated Cable Row",muscle:"Back",eq:"Cable",cues:["Sit tall","Pull to belly button","Squeeze shoulder blades","Slow controlled return"],yt:"https://www.youtube.com/watch?v=GZbfZ033f74"},
-  {id:"b4",name:"Cable Row Neutral Grip",muscle:"Back",eq:"Cable",cues:["Keep torso upright","Elbows track close to body","Drive elbows behind you","Full stretch forward"],yt:"https://www.youtube.com/watch?v=GZbfZ033f74"},
-  {id:"b5",name:"Machine High Row",muscle:"Back",eq:"Machine",cues:["Arms start high — feel lat stretch","Pull elbows down and back","Squeeze at bottom","Control weight on way up"],yt:"https://www.youtube.com/watch?v=zBaZNHMbWBw"},
-  {id:"b6",name:"Chest Supported Row Machine",muscle:"Back",eq:"Machine",cues:["Chest firmly against pad","Takes lower back out","Pull to hip level","Feel mid-back squeeze"],yt:"https://www.youtube.com/watch?v=xQNkFl30Kc8"},
-  {id:"b7",name:"Straight Arm Pulldown",muscle:"Back",eq:"Cable",cues:["Slight bend in elbows","Hinge at hip — lean forward","Arc arms down to hips","Feel the lat stretch at top"],yt:"https://www.youtube.com/watch?v=vWGtJDCz4ZI"},
-  {id:"b8",name:"Face Pull (Cable)",muscle:"Back",eq:"Cable",cues:["Cable at face height","Pull to forehead — elbows high","External rotate at end","Great for rear delts"],yt:"https://www.youtube.com/watch?v=rep-qVOkqgk"},
-  {id:"b9",name:"Dumbbell Single Arm Row",muscle:"Back",eq:"Dumbbell",cues:["Brace on bench","Pull elbow to hip","Full stretch at bottom","Don't rotate torso"],yt:"https://www.youtube.com/watch?v=roCP6wCXPqo"},
-  {id:"b10",name:"Barbell Bent Over Row",muscle:"Back",eq:"Barbell",cues:["Hinge to 45° — back flat","Pull to belly button","Squeeze at top","Lower with control"],yt:"https://www.youtube.com/watch?v=vT2GjY_Umpw"},
-  {id:"b11",name:"Pull Up",muscle:"Back",eq:"Bodyweight",cues:["Full hang at bottom","Pull chest to bar","Elbows drive down and back","No kipping"],yt:"https://www.youtube.com/watch?v=eGo4IYlbE5g"},
-  {id:"b12",name:"Chin Up",muscle:"Back",eq:"Bodyweight",cues:["Underhand grip","Chin clears the bar","Full extension at bottom","Controlled"],yt:"https://www.youtube.com/watch?v=vdpKkBLlL0A"},
-  {id:"b13",name:"T-Bar Row",muscle:"Back",eq:"Machine",cues:["Chest on pad if supported","Pull handles to chest","Elbows flare slightly out","Squeeze mid-back"],yt:"https://www.youtube.com/watch?v=KDEl3AmZbVE"},
-  {id:"b14",name:"Deadlift",muscle:"Back",eq:"Barbell",cues:["Bar over mid-foot","Hinge — don't squat","Big breath and brace core","Drive floor away"],yt:"https://www.youtube.com/watch?v=op9kVnSso6Q"},
-  {id:"s1",name:"Machine Shoulder Press",muscle:"Shoulders",eq:"Machine",cues:["Handles at shoulder level","Press straight up","Don't fully lock out","Control on the way down"],yt:"https://www.youtube.com/watch?v=qEwKCR5JCog"},
-  {id:"s2",name:"Cable Lateral Raise",muscle:"Shoulders",eq:"Cable",cues:["Cable at lowest","Raise to shoulder height","Slight forward lean","Pause 1 sec at top"],yt:"https://www.youtube.com/watch?v=PPdoAkIBxEc"},
-  {id:"s3",name:"Machine Lateral Raise",muscle:"Shoulders",eq:"Machine",cues:["Lead with elbows","Raise to shoulder height only","Slow descent","Don't shrug at top"],yt:"https://www.youtube.com/watch?v=pJFMhxvIbRE"},
-  {id:"s4",name:"Rear Delt Machine",muscle:"Shoulders",eq:"Machine",cues:["Chest against pad","Arms start forward","Arc back — feel rear delt","Slow return"],yt:"https://www.youtube.com/watch?v=7xgxT8eMCuY"},
-  {id:"s5",name:"Dumbbell Lateral Raise",muscle:"Shoulders",eq:"Dumbbell",cues:["Slight forward lean","Raise to shoulder height","Pinky slightly higher","No swinging"],yt:"https://www.youtube.com/watch?v=3VcKaXpzqRo"},
-  {id:"s6",name:"Dumbbell Shoulder Press",muscle:"Shoulders",eq:"Dumbbell",cues:["Dumbbells at ear height","Press straight up","Slow controlled descent","Don't touch at top"],yt:"https://www.youtube.com/watch?v=qEwKCR5JCog"},
-  {id:"s7",name:"Arnold Press",muscle:"Shoulders",eq:"Dumbbell",cues:["Start with palms facing you","Rotate as you press up","Palms face forward at top","Reverse on way down"],yt:"https://www.youtube.com/watch?v=6Z15_WdXmVw"},
-  {id:"s8",name:"Barbell Overhead Press",muscle:"Shoulders",eq:"Barbell",cues:["Bar at clavicle level","Press straight up","Squeeze glutes and brace core","Lower to chin level"],yt:"https://www.youtube.com/watch?v=2yjwXTZQDDI"},
-  {id:"s9",name:"Shrugs (Dumbbell)",muscle:"Shoulders",eq:"Dumbbell",cues:["Hold at sides","Shrug straight up — no rolling","Hold 1 sec at top","Drop slowly"],yt:"https://www.youtube.com/watch?v=cJRVVxmytaM"},
-  {id:"bi1",name:"Machine Preacher Curls",muscle:"Biceps",eq:"Machine",cues:["Upper arm flat on pad","Full extension at bottom","Squeeze hard at top","Don't swing torso"],yt:"https://www.youtube.com/watch?v=fIWP-FRFNU0"},
-  {id:"bi2",name:"Cable Bicep Curl",muscle:"Biceps",eq:"Cable",cues:["Elbows stay at sides","Curl to chin level","Squeeze at top","Slow 3-sec negative"],yt:"https://www.youtube.com/watch?v=NFzTWp2qpiE"},
-  {id:"bi3",name:"Incline Bench Cable Curl",muscle:"Biceps",eq:"Cable",cues:["Face away from cable","Arms stretched behind at bottom","Full stretch on long head","Curl up — squeeze hard"],yt:"https://www.youtube.com/watch?v=Jvj2wV0vOFU"},
-  {id:"bi4",name:"Hammer Curl (Rope Cable)",muscle:"Biceps",eq:"Cable",cues:["Neutral grip on rope","Curl up — thumbs toward shoulder","Hits brachialis","Keep elbows tucked"],yt:"https://www.youtube.com/watch?v=TwD-YGVP4Bk"},
-  {id:"bi5",name:"Dumbbell Bicep Curl",muscle:"Biceps",eq:"Dumbbell",cues:["Supinate as you curl","Elbows stay at sides","Full extension at bottom","No swinging"],yt:"https://www.youtube.com/watch?v=ykJmrZ5v0Oo"},
-  {id:"bi6",name:"Barbell Curl",muscle:"Biceps",eq:"Barbell",cues:["Shoulder width grip","Elbows fixed at sides","Curl to chin level","Slow descent"],yt:"https://www.youtube.com/watch?v=kwG2ipFRgfo"},
-  {id:"bi7",name:"Concentration Curl",muscle:"Biceps",eq:"Dumbbell",cues:["Elbow braced on thigh","Full extension at bottom","Curl to shoulder","Great for peak"],yt:"https://www.youtube.com/watch?v=Jvj2wV0vOFU"},
-  {id:"t1",name:"Tricep Pushdown",muscle:"Triceps",eq:"Cable",cues:["Elbows stay at sides","Push down to full extension","Squeeze at bottom","Slow return"],yt:"https://www.youtube.com/watch?v=2-LAMcpzODU"},
-  {id:"t2",name:"Overhead Cable Extension",muscle:"Triceps",eq:"Cable",cues:["Cable set high — face away","Arms behind head to start","Extend overhead — full lockout","Hits long head"],yt:"https://www.youtube.com/watch?v=Bzt7UG3_SZU"},
-  {id:"t3",name:"Cable Kickback",muscle:"Triceps",eq:"Cable",cues:["Hinge forward at hip","Upper arm parallel to floor","Extend arm fully back","Squeeze at full extension"],yt:"https://www.youtube.com/watch?v=6SS6K3lAwZ8"},
-  {id:"t4",name:"Skull Crusher (EZ Bar)",muscle:"Triceps",eq:"Barbell",cues:["Lower bar to forehead","Elbows stay pointed up","Full extension at top","Use EZ bar for comfort"],yt:"https://www.youtube.com/watch?v=d_KZxkY_5cM"},
-  {id:"t5",name:"Dumbbell Overhead Extension",muscle:"Triceps",eq:"Dumbbell",cues:["Both hands on one dumbbell","Lower behind head","Extend fully — squeeze","Elbows stay close to head"],yt:"https://www.youtube.com/watch?v=YbX7Wd8jQ-Q"},
-  {id:"t6",name:"Rope Pushdown",muscle:"Triceps",eq:"Cable",cues:["Split rope at bottom","Elbows stay at sides","Flare hands out at bottom","Full extension"],yt:"https://www.youtube.com/watch?v=vB5OHsJ3EME"},
-  {id:"q1",name:"Leg Press",muscle:"Quads",eq:"Machine",cues:["Feet shoulder width — mid platform","Don't lock knees at top","Lower until 90°","Slow controlled descent"],yt:"https://www.youtube.com/watch?v=IZxyjW7MPJQ"},
-  {id:"q2",name:"Hack Squat Machine",muscle:"Quads",eq:"Machine",cues:["Feet shoulder width","Chest up — back on pad","Lower until thighs parallel","Drive through heels"],yt:"https://www.youtube.com/watch?v=0tn5K9NlCfo"},
-  {id:"q3",name:"Leg Extension",muscle:"Quads",eq:"Machine",cues:["Knee aligns with pivot","Extend fully — squeeze hard","Hold 1 sec at top","Slow 3-sec negative"],yt:"https://www.youtube.com/watch?v=YyvSfVjQeL0"},
-  {id:"q4",name:"Bulgarian Split Squat",muscle:"Quads",eq:"Bodyweight",cues:["Rear foot on bench","Front foot far forward","Lower until rear knee near floor","Drive through front heel"],yt:"https://www.youtube.com/watch?v=2C-uNgKwPLE"},
-  {id:"q5",name:"Barbell Back Squat",muscle:"Quads",eq:"Barbell",cues:["Bar on upper traps","Feet shoulder width, toes out","Break at hips and knees together","Drive knees out over toes"],yt:"https://www.youtube.com/watch?v=Dy28eq2PjcM"},
-  {id:"q6",name:"Goblet Squat",muscle:"Quads",eq:"Dumbbell",cues:["Hold dumbbell at chest","Feet slightly wider","Squat deep — elbows inside knees","Great for beginners"],yt:"https://www.youtube.com/watch?v=CKQybe4DPuA"},
-  {id:"q7",name:"Walking Lunges",muscle:"Quads",eq:"Bodyweight",cues:["Long stride","Back knee lowers near floor","Torso upright","Alternate legs"],yt:"https://www.youtube.com/watch?v=L8fvypPrzzs"},
-  {id:"h1",name:"Seated Leg Curl",muscle:"Hamstrings",eq:"Machine",cues:["Pad just above ankles","Curl fully — heels to glutes","Squeeze at bottom","Slow 3-sec return"],yt:"https://www.youtube.com/watch?v=1Tq3QdYUuHs"},
-  {id:"h2",name:"Lying Leg Curl",muscle:"Hamstrings",eq:"Machine",cues:["Hips stay flat on pad","Curl heels toward glutes","Squeeze hard at top","Don't let hips rise"],yt:"https://www.youtube.com/watch?v=n7sV1MckJeM"},
-  {id:"h3",name:"Romanian Deadlift (Dumbbell)",muscle:"Hamstrings",eq:"Dumbbell",cues:["Soft bend in knees","Hinge at hip — feel stretch","Lower until mid-shin","Drive hips forward"],yt:"https://www.youtube.com/watch?v=hCDzSR6bW10"},
-  {id:"h4",name:"Romanian Deadlift (Barbell)",muscle:"Hamstrings",eq:"Barbell",cues:["Bar stays close to legs","Hinge until stretch felt","Back stays flat","Squeeze glutes"],yt:"https://www.youtube.com/watch?v=jEy_czb3RKA"},
-  {id:"g1",name:"Hip Thrust Machine",muscle:"Glutes",eq:"Machine",cues:["Upper back on bench","Drive hips up — squeeze hard","Chin tucked","Hold 1 sec at top"],yt:"https://www.youtube.com/watch?v=mv_1FQWRTRE"},
-  {id:"g2",name:"Glute Bridge Machine",muscle:"Glutes",eq:"Machine",cues:["Feet flat — hip width","Drive through heels","Full hip extension","Squeeze and hold"],yt:"https://www.youtube.com/watch?v=OUgsJ8-Vi0E"},
-  {id:"g3",name:"Barbell Hip Thrust",muscle:"Glutes",eq:"Barbell",cues:["Upper back on bench","Bar padded at hip crease","Drive hips to full extension","Chin tucked"],yt:"https://www.youtube.com/watch?v=mv_1FQWRTRE"},
-  {id:"g4",name:"Sumo Squat",muscle:"Glutes",eq:"Dumbbell",cues:["Wide stance — toes out","Dumbbell at chest","Squat deep","Glute focused"],yt:"https://www.youtube.com/watch?v=qJwN8kCm4lI"},
-  {id:"ca1",name:"Standing Calf Raise Machine",muscle:"Calves",eq:"Machine",cues:["Full range — heel below platform","Rise onto ball of foot","Pause and squeeze at top","Slow descent"],yt:"https://www.youtube.com/watch?v=gwLzBJYoWlI"},
-  {id:"ca2",name:"Seated Calf Raise",muscle:"Calves",eq:"Machine",cues:["Knees bent — targets soleus","Pad on lower thigh","Full range of motion","Slow and deliberate"],yt:"https://www.youtube.com/watch?v=JbyjNymZOt0"},
-  {id:"ca3",name:"Leg Press Calf Raise",muscle:"Calves",eq:"Machine",cues:["Feet at bottom of platform","Only toes on platform","Full extension at top","Slow controlled return"],yt:"https://www.youtube.com/watch?v=PKOxHTCNyGk"},
-  {id:"ab1",name:"Cable Crunch",muscle:"Abs",eq:"Cable",cues:["Kneel facing cable","Rope behind head","Crunch down — elbows to knees","Round the back"],yt:"https://www.youtube.com/watch?v=2fbujeH3F0E"},
-  {id:"ab2",name:"Hanging Knee Raise",muscle:"Abs",eq:"Bodyweight",cues:["Dead hang to start","Bring knees to chest","Control the swing","No momentum"],yt:"https://www.youtube.com/watch?v=Pr1ieGZ5atk"},
-  {id:"ab3",name:"Hanging Leg Raise",muscle:"Abs",eq:"Bodyweight",cues:["Legs straight","Raise to parallel or higher","Don't swing","Slow descent"],yt:"https://www.youtube.com/watch?v=hdng3Nm1x_E"},
-  {id:"ab4",name:"Plank",muscle:"Abs",eq:"Bodyweight",cues:["Forearms on floor","Body in straight line","Squeeze glutes and abs","Breathe normally"],yt:"https://www.youtube.com/watch?v=pSHjTRCQxIw"},
-  {id:"ab5",name:"Ab Wheel Rollout",muscle:"Abs",eq:"Other",cues:["Start kneeling","Roll out slowly — back flat","Go as far as you control","Pull back using abs"],yt:"https://www.youtube.com/watch?v=_DBgLzFVVhk"},
-  {id:"ab6",name:"Russian Twist",muscle:"Abs",eq:"Bodyweight",cues:["Lean back 45°","Feet off floor for harder","Rotate side to side","Hold weight for progression"],yt:"https://www.youtube.com/watch?v=wkD8rjkodUI"},
-  {id:"ab7",name:"Bicycle Crunch",muscle:"Abs",eq:"Bodyweight",cues:["Alternate elbow to opposite knee","Don't pull on neck","Full rotation","Slow and deliberate"],yt:"https://www.youtube.com/watch?v=9FGilxCbdz8"},
-  {id:"ab8",name:"Dead Bug",muscle:"Abs",eq:"Bodyweight",cues:["Lower back pressed to floor","Extend opposite arm and leg","Move slowly","Great for core stability"],yt:"https://www.youtube.com/watch?v=4XLEnwUr1d8"},
-  {id:"ab9",name:"Pallof Press",muscle:"Abs",eq:"Cable",cues:["Cable at chest height","Stand side-on to cable","Press out and hold","Anti-rotation core"],yt:"https://www.youtube.com/watch?v=AH_QZLm_0-s"},
+  {id:"c1",name:"Machine Chest Press",muscle:"Chest",eq:"Machine",cues:["Seat height: handles at mid-chest","Drive elbows slightly down, not flared 90°","Full extension but don't lock out","Slow 2-sec negative"],yt:null},
+  {id:"c2",name:"Incline Machine Chest Press",muscle:"Chest",eq:"Machine",cues:["Set incline 30–45°","Upper chest focus — feel the squeeze at top","Don't let shoulders roll forward","Control the weight down"],yt:null},
+  {id:"c3",name:"Flat Machine Press",muscle:"Chest",eq:"Machine",cues:["Chest up, slight arch","Push through chest not shoulders","Pause 1 sec at peak contraction","Return slowly under control"],yt:null},
+  {id:"c4",name:"Pec Deck Fly",muscle:"Chest",eq:"Machine",cues:["Elbows slightly bent throughout","Think hugging a barrel","Squeeze hard at the centre","Don't go past shoulder line on way back"],yt:null},
+  {id:"c5",name:"Cable Chest Fly (Low to High)",muscle:"Chest",eq:"Cable",cues:["Cables set at lowest position","Arc up and in toward upper chest","Slight forward lean","Feel the stretch at the bottom"],yt:null},
+  {id:"c6",name:"Cable Chest Fly (High to Low)",muscle:"Chest",eq:"Cable",cues:["Cables set at highest position","Arc down toward lower chest","Keep soft bend in elbows","Control the negative"],yt:null},
+  {id:"c7",name:"Dumbbell Flat Bench Press",muscle:"Chest",eq:"Dumbbell",cues:["Dumbbells touch at top","Lower to chest level","Feet flat on floor","Arch naturally"],yt:null},
+  {id:"c8",name:"Dumbbell Incline Press",muscle:"Chest",eq:"Dumbbell",cues:["30–45° incline","Upper chest focus","Don't flare elbows too wide","Full range of motion"],yt:null},
+  {id:"c9",name:"Dumbbell Fly",muscle:"Chest",eq:"Dumbbell",cues:["Soft bend in elbows","Wide arc down — feel the stretch","Squeeze at top","Don't go too heavy"],yt:null},
+  {id:"c10",name:"Push Up",muscle:"Chest",eq:"Bodyweight",cues:["Hands slightly wider than shoulders","Body straight","Lower chest close to floor","Elbows at 45°"],yt:null},
+  {id:"c11",name:"Barbell Bench Press",muscle:"Chest",eq:"Barbell",cues:["Grip just outside shoulder width","Bar touches lower chest","Leg drive into floor","Retract shoulder blades"],yt:null},
+  {id:"c12",name:"Dips (Chest Focus)",muscle:"Chest",eq:"Bodyweight",cues:["Lean forward 30°","Elbows flare slightly out","Lower until shoulder stretch","Don't lock out elbows"],yt:null},
+  {id:"b1",name:"Lat Pulldown Wide Grip",muscle:"Back",eq:"Cable",cues:["Pull to upper chest","Lead with elbows driving down","Lean back slightly 10–15°","Squeeze lats at bottom"],yt:null},
+  {id:"b2",name:"Close Grip Lat Pulldown",muscle:"Back",eq:"Cable",cues:["Neutral grip","Elbows drive straight down","Feel lats stretch at top","Full extension between reps"],yt:null},
+  {id:"b3",name:"Seated Cable Row",muscle:"Back",eq:"Cable",cues:["Sit tall","Pull to belly button","Squeeze shoulder blades","Slow controlled return"],yt:null},
+  {id:"b4",name:"Cable Row Neutral Grip",muscle:"Back",eq:"Cable",cues:["Keep torso upright","Elbows track close to body","Drive elbows behind you","Full stretch forward"],yt:null},
+  {id:"b5",name:"Machine High Row",muscle:"Back",eq:"Machine",cues:["Arms start high — feel lat stretch","Pull elbows down and back","Squeeze at bottom","Control weight on way up"],yt:null},
+  {id:"b6",name:"Chest Supported Row Machine",muscle:"Back",eq:"Machine",cues:["Chest firmly against pad","Takes lower back out","Pull to hip level","Feel mid-back squeeze"],yt:null},
+  {id:"b7",name:"Straight Arm Pulldown",muscle:"Back",eq:"Cable",cues:["Slight bend in elbows","Hinge at hip — lean forward","Arc arms down to hips","Feel the lat stretch at top"],yt:null},
+  {id:"b8",name:"Face Pull (Cable)",muscle:"Back",eq:"Cable",cues:["Cable at face height","Pull to forehead — elbows high","External rotate at end","Great for rear delts"],yt:null},
+  {id:"b9",name:"Dumbbell Single Arm Row",muscle:"Back",eq:"Dumbbell",cues:["Brace on bench","Pull elbow to hip","Full stretch at bottom","Don't rotate torso"],yt:null},
+  {id:"b10",name:"Barbell Bent Over Row",muscle:"Back",eq:"Barbell",cues:["Hinge to 45° — back flat","Pull to belly button","Squeeze at top","Lower with control"],yt:null},
+  {id:"b11",name:"Pull Up",muscle:"Back",eq:"Bodyweight",cues:["Full hang at bottom","Pull chest to bar","Elbows drive down and back","No kipping"],yt:null},
+  {id:"b12",name:"Chin Up",muscle:"Back",eq:"Bodyweight",cues:["Underhand grip","Chin clears the bar","Full extension at bottom","Controlled"],yt:null},
+  {id:"b13",name:"T-Bar Row",muscle:"Back",eq:"Machine",cues:["Chest on pad if supported","Pull handles to chest","Elbows flare slightly out","Squeeze mid-back"],yt:null},
+  {id:"b14",name:"Deadlift",muscle:"Back",eq:"Barbell",cues:["Bar over mid-foot","Hinge — don't squat","Big breath and brace core","Drive floor away"],yt:null},
+  {id:"s1",name:"Machine Shoulder Press",muscle:"Shoulders",eq:"Machine",cues:["Handles at shoulder level","Press straight up","Don't fully lock out","Control on the way down"],yt:null},
+  {id:"s2",name:"Cable Lateral Raise",muscle:"Shoulders",eq:"Cable",cues:["Cable at lowest","Raise to shoulder height","Slight forward lean","Pause 1 sec at top"],yt:null},
+  {id:"s3",name:"Machine Lateral Raise",muscle:"Shoulders",eq:"Machine",cues:["Lead with elbows","Raise to shoulder height only","Slow descent","Don't shrug at top"],yt:null},
+  {id:"s4",name:"Rear Delt Machine",muscle:"Shoulders",eq:"Machine",cues:["Chest against pad","Arms start forward","Arc back — feel rear delt","Slow return"],yt:null},
+  {id:"s5",name:"Dumbbell Lateral Raise",muscle:"Shoulders",eq:"Dumbbell",cues:["Slight forward lean","Raise to shoulder height","Pinky slightly higher","No swinging"],yt:null},
+  {id:"s6",name:"Dumbbell Shoulder Press",muscle:"Shoulders",eq:"Dumbbell",cues:["Dumbbells at ear height","Press straight up","Slow controlled descent","Don't touch at top"],yt:null},
+  {id:"s7",name:"Arnold Press",muscle:"Shoulders",eq:"Dumbbell",cues:["Start with palms facing you","Rotate as you press up","Palms face forward at top","Reverse on way down"],yt:null},
+  {id:"s8",name:"Barbell Overhead Press",muscle:"Shoulders",eq:"Barbell",cues:["Bar at clavicle level","Press straight up","Squeeze glutes and brace core","Lower to chin level"],yt:null},
+  {id:"s9",name:"Shrugs (Dumbbell)",muscle:"Shoulders",eq:"Dumbbell",cues:["Hold at sides","Shrug straight up — no rolling","Hold 1 sec at top","Drop slowly"],yt:null},
+  {id:"bi1",name:"Machine Preacher Curls",muscle:"Biceps",eq:"Machine",cues:["Upper arm flat on pad","Full extension at bottom","Squeeze hard at top","Don't swing torso"],yt:null},
+  {id:"bi2",name:"Cable Bicep Curl",muscle:"Biceps",eq:"Cable",cues:["Elbows stay at sides","Curl to chin level","Squeeze at top","Slow 3-sec negative"],yt:null},
+  {id:"bi3",name:"Incline Bench Cable Curl",muscle:"Biceps",eq:"Cable",cues:["Face away from cable","Arms stretched behind at bottom","Full stretch on long head","Curl up — squeeze hard"],yt:null},
+  {id:"bi4",name:"Hammer Curl (Rope Cable)",muscle:"Biceps",eq:"Cable",cues:["Neutral grip on rope","Curl up — thumbs toward shoulder","Hits brachialis","Keep elbows tucked"],yt:null},
+  {id:"bi5",name:"Dumbbell Bicep Curl",muscle:"Biceps",eq:"Dumbbell",cues:["Supinate as you curl","Elbows stay at sides","Full extension at bottom","No swinging"],yt:null},
+  {id:"bi6",name:"Barbell Curl",muscle:"Biceps",eq:"Barbell",cues:["Shoulder width grip","Elbows fixed at sides","Curl to chin level","Slow descent"],yt:null},
+  {id:"bi7",name:"Concentration Curl",muscle:"Biceps",eq:"Dumbbell",cues:["Elbow braced on thigh","Full extension at bottom","Curl to shoulder","Great for peak"],yt:null},
+  {id:"t1",name:"Tricep Pushdown",muscle:"Triceps",eq:"Cable",cues:["Elbows stay at sides","Push down to full extension","Squeeze at bottom","Slow return"],yt:null},
+  {id:"t2",name:"Overhead Cable Extension",muscle:"Triceps",eq:"Cable",cues:["Cable set high — face away","Arms behind head to start","Extend overhead — full lockout","Hits long head"],yt:null},
+  {id:"t3",name:"Cable Kickback",muscle:"Triceps",eq:"Cable",cues:["Hinge forward at hip","Upper arm parallel to floor","Extend arm fully back","Squeeze at full extension"],yt:null},
+  {id:"t4",name:"Skull Crusher (EZ Bar)",muscle:"Triceps",eq:"Barbell",cues:["Lower bar to forehead","Elbows stay pointed up","Full extension at top","Use EZ bar for comfort"],yt:null},
+  {id:"t5",name:"Dumbbell Overhead Extension",muscle:"Triceps",eq:"Dumbbell",cues:["Both hands on one dumbbell","Lower behind head","Extend fully — squeeze","Elbows stay close to head"],yt:null},
+  {id:"t6",name:"Rope Pushdown",muscle:"Triceps",eq:"Cable",cues:["Split rope at bottom","Elbows stay at sides","Flare hands out at bottom","Full extension"],yt:null},
+  {id:"q1",name:"Leg Press",muscle:"Quads",eq:"Machine",cues:["Feet shoulder width — mid platform","Don't lock knees at top","Lower until 90°","Slow controlled descent"],yt:null},
+  {id:"q2",name:"Hack Squat Machine",muscle:"Quads",eq:"Machine",cues:["Feet shoulder width","Chest up — back on pad","Lower until thighs parallel","Drive through heels"],yt:null},
+  {id:"q3",name:"Leg Extension",muscle:"Quads",eq:"Machine",cues:["Knee aligns with pivot","Extend fully — squeeze hard","Hold 1 sec at top","Slow 3-sec negative"],yt:null},
+  {id:"q4",name:"Bulgarian Split Squat",muscle:"Quads",eq:"Bodyweight",cues:["Rear foot on bench","Front foot far forward","Lower until rear knee near floor","Drive through front heel"],yt:null},
+  {id:"q5",name:"Barbell Back Squat",muscle:"Quads",eq:"Barbell",cues:["Bar on upper traps","Feet shoulder width, toes out","Break at hips and knees together","Drive knees out over toes"],yt:null},
+  {id:"q6",name:"Goblet Squat",muscle:"Quads",eq:"Dumbbell",cues:["Hold dumbbell at chest","Feet slightly wider","Squat deep — elbows inside knees","Great for beginners"],yt:null},
+  {id:"q7",name:"Walking Lunges",muscle:"Quads",eq:"Bodyweight",cues:["Long stride","Back knee lowers near floor","Torso upright","Alternate legs"],yt:null},
+  {id:"h1",name:"Seated Leg Curl",muscle:"Hamstrings",eq:"Machine",cues:["Pad just above ankles","Curl fully — heels to glutes","Squeeze at bottom","Slow 3-sec return"],yt:null},
+  {id:"h2",name:"Lying Leg Curl",muscle:"Hamstrings",eq:"Machine",cues:["Hips stay flat on pad","Curl heels toward glutes","Squeeze hard at top","Don't let hips rise"],yt:null},
+  {id:"h3",name:"Romanian Deadlift (Dumbbell)",muscle:"Hamstrings",eq:"Dumbbell",cues:["Soft bend in knees","Hinge at hip — feel stretch","Lower until mid-shin","Drive hips forward"],yt:null},
+  {id:"h4",name:"Romanian Deadlift (Barbell)",muscle:"Hamstrings",eq:"Barbell",cues:["Bar stays close to legs","Hinge until stretch felt","Back stays flat","Squeeze glutes"],yt:null},
+  {id:"g1",name:"Hip Thrust Machine",muscle:"Glutes",eq:"Machine",cues:["Upper back on bench","Drive hips up — squeeze hard","Chin tucked","Hold 1 sec at top"],yt:null},
+  {id:"g2",name:"Glute Bridge Machine",muscle:"Glutes",eq:"Machine",cues:["Feet flat — hip width","Drive through heels","Full hip extension","Squeeze and hold"],yt:null},
+  {id:"g3",name:"Barbell Hip Thrust",muscle:"Glutes",eq:"Barbell",cues:["Upper back on bench","Bar padded at hip crease","Drive hips to full extension","Chin tucked"],yt:null},
+  {id:"g4",name:"Sumo Squat",muscle:"Glutes",eq:"Dumbbell",cues:["Wide stance — toes out","Dumbbell at chest","Squat deep","Glute focused"],yt:null},
+  {id:"ca1",name:"Standing Calf Raise Machine",muscle:"Calves",eq:"Machine",cues:["Full range — heel below platform","Rise onto ball of foot","Pause and squeeze at top","Slow descent"],yt:null},
+  {id:"ca2",name:"Seated Calf Raise",muscle:"Calves",eq:"Machine",cues:["Knees bent — targets soleus","Pad on lower thigh","Full range of motion","Slow and deliberate"],yt:null},
+  {id:"ca3",name:"Leg Press Calf Raise",muscle:"Calves",eq:"Machine",cues:["Feet at bottom of platform","Only toes on platform","Full extension at top","Slow controlled return"],yt:null},
+  {id:"ab1",name:"Cable Crunch",muscle:"Abs",eq:"Cable",cues:["Kneel facing cable","Rope behind head","Crunch down — elbows to knees","Round the back"],yt:null},
+  {id:"ab2",name:"Hanging Knee Raise",muscle:"Abs",eq:"Bodyweight",cues:["Dead hang to start","Bring knees to chest","Control the swing","No momentum"],yt:null},
+  {id:"ab3",name:"Hanging Leg Raise",muscle:"Abs",eq:"Bodyweight",cues:["Legs straight","Raise to parallel or higher","Don't swing","Slow descent"],yt:null},
+  {id:"ab4",name:"Plank",muscle:"Abs",eq:"Bodyweight",cues:["Forearms on floor","Body in straight line","Squeeze glutes and abs","Breathe normally"],yt:null},
+  {id:"ab5",name:"Ab Wheel Rollout",muscle:"Abs",eq:"Other",cues:["Start kneeling","Roll out slowly — back flat","Go as far as you control","Pull back using abs"],yt:null},
+  {id:"ab6",name:"Russian Twist",muscle:"Abs",eq:"Bodyweight",cues:["Lean back 45°","Feet off floor for harder","Rotate side to side","Hold weight for progression"],yt:null},
+  {id:"ab7",name:"Bicycle Crunch",muscle:"Abs",eq:"Bodyweight",cues:["Alternate elbow to opposite knee","Don't pull on neck","Full rotation","Slow and deliberate"],yt:null},
+  {id:"ab8",name:"Dead Bug",muscle:"Abs",eq:"Bodyweight",cues:["Lower back pressed to floor","Extend opposite arm and leg","Move slowly","Great for core stability"],yt:null},
+  {id:"ab9",name:"Pallof Press",muscle:"Abs",eq:"Cable",cues:["Cable at chest height","Stand side-on to cable","Press out and hold","Anti-rotation core"],yt:null},
 ];
 
 const MUSCLE_COLORS = {Chest:'#e8734a',Back:'#5b9cf6',Shoulders:'#e8734a',Biceps:'#5b9cf6',Triceps:'#e8734a',Quads:'#52c47a',Hamstrings:'#52c47a',Glutes:'#52c47a',Calves:'#52c47a',Abs:'#b57bee'};
@@ -726,7 +726,7 @@ function openTut(nm){
   const c=MUSCLE_COLORS[ex.muscle]||'var(--accent)';
   q('tut-muscle').innerHTML=`<span style="background:${c}22;color:${c};padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700">${ex.muscle}</span> · ${ex.eq}`;
   q('tut-cues').innerHTML=ex.cues.map((c2,i)=>`<div class="cue-item"><div class="cue-n">${i+1}</div><div style="font-size:14px;line-height:1.5;flex:1">${c2}</div></div>`).join('');
-  curYT=ex.yt;openM('tut-modal');
+  curYT='https://www.youtube.com/results?search_query='+encodeURIComponent(ex.name+' proper form tutorial');openM('tut-modal');
 }
 function openYT(){if(curYT)window.open(curYT,'_blank');}
 
@@ -755,6 +755,46 @@ function renderNut(){
   }).join('');
 }
 
+
+// Common foods fallback database
+function commonFoods(query){
+  const db=[
+    {product_name:"Chicken Breast (grilled)",brands:"Generic",nutriments:{"energy-kcal_100g":165,"proteins_100g":31,"carbohydrates_100g":0,"fat_100g":3.6}},
+    {product_name:"Chicken Maryland (grilled)",brands:"Generic",nutriments:{"energy-kcal_100g":218,"proteins_100g":25,"carbohydrates_100g":0,"fat_100g":12}},
+    {product_name:"White Rice (cooked)",brands:"Generic",nutriments:{"energy-kcal_100g":130,"proteins_100g":2.7,"carbohydrates_100g":28,"fat_100g":0.3}},
+    {product_name:"Sella Basmati Rice (cooked)",brands:"Generic",nutriments:{"energy-kcal_100g":121,"proteins_100g":2.8,"carbohydrates_100g":25,"fat_100g":0.4}},
+    {product_name:"Brown Rice (cooked)",brands:"Generic",nutriments:{"energy-kcal_100g":112,"proteins_100g":2.6,"carbohydrates_100g":23,"fat_100g":0.9}},
+    {product_name:"Eggs (whole)",brands:"Generic",nutriments:{"energy-kcal_100g":155,"proteins_100g":13,"carbohydrates_100g":1.1,"fat_100g":11}},
+    {product_name:"Egg White",brands:"Generic",nutriments:{"energy-kcal_100g":52,"proteins_100g":11,"carbohydrates_100g":0.7,"fat_100g":0.2}},
+    {product_name:"Oats",brands:"Generic",nutriments:{"energy-kcal_100g":389,"proteins_100g":17,"carbohydrates_100g":66,"fat_100g":7}},
+    {product_name:"Banana",brands:"Generic",nutriments:{"energy-kcal_100g":89,"proteins_100g":1.1,"carbohydrates_100g":23,"fat_100g":0.3}},
+    {product_name:"Apple",brands:"Generic",nutriments:{"energy-kcal_100g":52,"proteins_100g":0.3,"carbohydrates_100g":14,"fat_100g":0.2}},
+    {product_name:"Greek Yogurt (plain)",brands:"Generic",nutriments:{"energy-kcal_100g":59,"proteins_100g":10,"carbohydrates_100g":3.6,"fat_100g":0.4}},
+    {product_name:"Milk (full fat)",brands:"Generic",nutriments:{"energy-kcal_100g":61,"proteins_100g":3.2,"carbohydrates_100g":4.8,"fat_100g":3.3}},
+    {product_name:"Oat Milk",brands:"Generic",nutriments:{"energy-kcal_100g":47,"proteins_100g":1,"carbohydrates_100g":7,"fat_100g":1.5}},
+    {product_name:"Whey Protein Powder",brands:"Generic",nutriments:{"energy-kcal_100g":400,"proteins_100g":80,"carbohydrates_100g":8,"fat_100g":5}},
+    {product_name:"Salmon (grilled)",brands:"Generic",nutriments:{"energy-kcal_100g":208,"proteins_100g":20,"carbohydrates_100g":0,"fat_100g":13}},
+    {product_name:"Tuna (canned in water)",brands:"Generic",nutriments:{"energy-kcal_100g":116,"proteins_100g":26,"carbohydrates_100g":0,"fat_100g":1}},
+    {product_name:"Beef (lean mince)",brands:"Generic",nutriments:{"energy-kcal_100g":215,"proteins_100g":26,"carbohydrates_100g":0,"fat_100g":12}},
+    {product_name:"Broccoli",brands:"Generic",nutriments:{"energy-kcal_100g":34,"proteins_100g":2.8,"carbohydrates_100g":7,"fat_100g":0.4}},
+    {product_name:"Sweet Potato",brands:"Generic",nutriments:{"energy-kcal_100g":86,"proteins_100g":1.6,"carbohydrates_100g":20,"fat_100g":0.1}},
+    {product_name:"Avocado",brands:"Generic",nutriments:{"energy-kcal_100g":160,"proteins_100g":2,"carbohydrates_100g":9,"fat_100g":15}},
+    {product_name:"Almonds",brands:"Generic",nutriments:{"energy-kcal_100g":579,"proteins_100g":21,"carbohydrates_100g":22,"fat_100g":50}},
+    {product_name:"Peanut Butter",brands:"Generic",nutriments:{"energy-kcal_100g":588,"proteins_100g":25,"carbohydrates_100g":20,"fat_100g":50}},
+    {product_name:"Olive Oil",brands:"Generic",nutriments:{"energy-kcal_100g":884,"proteins_100g":0,"carbohydrates_100g":0,"fat_100g":100}},
+    {product_name:"Bread (white)",brands:"Generic",nutriments:{"energy-kcal_100g":265,"proteins_100g":9,"carbohydrates_100g":49,"fat_100g":3.2}},
+    {product_name:"Bread (wholemeal)",brands:"Generic",nutriments:{"energy-kcal_100g":247,"proteins_100g":13,"carbohydrates_100g":41,"fat_100g":3.4}},
+    {product_name:"Pasta (cooked)",brands:"Generic",nutriments:{"energy-kcal_100g":131,"proteins_100g":5,"carbohydrates_100g":25,"fat_100g":1.1}},
+    {product_name:"Cottage Cheese",brands:"Generic",nutriments:{"energy-kcal_100g":98,"proteins_100g":11,"carbohydrates_100g":3.4,"fat_100g":4.3}},
+    {product_name:"Protein Bar",brands:"Generic",nutriments:{"energy-kcal_100g":370,"proteins_100g":30,"carbohydrates_100g":35,"fat_100g":10}},
+    {product_name:"Iced Coffee (black)",brands:"Generic",nutriments:{"energy-kcal_100g":5,"proteins_100g":0.3,"carbohydrates_100g":0.7,"fat_100g":0}},
+    {product_name:"Orange Juice",brands:"Generic",nutriments:{"energy-kcal_100g":45,"proteins_100g":0.7,"carbohydrates_100g":10,"fat_100g":0.2}},
+  ];
+  if(!query)return db.slice(0,10);
+  const q2=query.toLowerCase();
+  return db.filter(f=>f.product_name.toLowerCase().includes(q2)).slice(0,10);
+}
+
 let fsTimer=null;
 function openFoodSearch(meal){
   selMeal=meal;q('fs-inp').value='';q('food-res').innerHTML='<div class="food-loading">Search for food above</div>';
@@ -766,20 +806,27 @@ function srchFood(val){
   q('food-res').innerHTML='<div class="food-loading">Searching...</div>';
   fsTimer=setTimeout(async()=>{
     try{
-      const r=await fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(val)}&search_simple=1&action=process&json=1&page_size=15`);
-      const d=await r.json();const prods=(d.products||[]).filter(p=>p.product_name&&p.nutriments);
-      if(!prods.length){q('food-res').innerHTML='<div class="food-loading">No results found</div>';return;}
+      // Try Open Food Facts v2 API - faster endpoint
+      const r=await fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(val)}&search_simple=1&action=process&json=1&page_size=20&fields=product_name,brands,nutriments,image_small_url`,{signal:AbortSignal.timeout(8000)});
+      const d=await r.json();
+      let prods=(d.products||[]).filter(p=>p.product_name&&p.nutriments&&(p.nutriments['energy-kcal_100g']||p.nutriments['energy_100g']));
+      if(!prods.length){q('food-res').innerHTML='<div class="food-loading">No results — try a different search term</div>';return;}
       window._fr=prods;
       q('food-res').innerHTML=prods.map((p,i)=>{
-        const cal=Math.round(p.nutriments['energy-kcal_100g']||0);
-        return `<div class="fr-item" onclick="selFood(${i})"><div class="fr-name">${p.product_name||'Unknown'}</div><div class="fr-brand">${p.brands||''}</div><div class="fr-cal">${cal} kcal per 100g</div></div>`;
+        const cal=Math.round(p.nutriments['energy-kcal_100g']||p.nutriments['energy_100g']/4.184||0);
+        return `<div class="fr-item" onclick="selFood(${i})"><div class="fr-name">${p.product_name||'Unknown'}</div><div class="fr-brand">${p.brands||'Generic'}</div><div class="fr-cal">${cal} kcal per 100g</div></div>`;
       }).join('');
-    }catch(e){q('food-res').innerHTML='<div class="food-loading">Error — try again</div>';}
-  },600);
+    }catch(e){
+      // Fallback: show common foods manually
+      const common=commonFoods(val);
+      if(common.length){window._fr=common;q('food-res').innerHTML=common.map((p,i)=>`<div class="fr-item" onclick="selFood(${i})"><div class="fr-name">${p.product_name}</div><div class="fr-brand">${p.brands}</div><div class="fr-cal">${Math.round(p.nutriments['energy-kcal_100g'])} kcal per 100g</div></div>`).join('');}
+      else q('food-res').innerHTML='<div class="food-loading">No results — try again</div>';
+    }
+  },400);
 }
 function selFood(i){
   const p=window._fr[i];if(!p)return;
-  curFood={name:p.product_name||'Unknown',brand:p.brands||'',c100:p.nutriments['energy-kcal_100g']||0,p100:p.nutriments['proteins_100g']||0,cb100:p.nutriments['carbohydrates_100g']||0,f100:p.nutriments['fat_100g']||0};
+  curFood={name:p.product_name||p.nm||'Unknown',brand:p.brands||p.br||'',c100:p.nutriments?.['energy-kcal_100g']||p.nutriments?.['energy_100g']/4.184||p.c100||0,p100:p.nutriments?.['proteins_100g']||p.p100||0,cb100:p.nutriments?.['carbohydrates_100g']||p.cb100||0,f100:p.nutriments?.['fat_100g']||p.f100||0};
   q('fd-nm').textContent=curFood.name;q('fd-br').textContent=curFood.brand;q('fd-qty').value=100;updFood();
   document.querySelectorAll('.mt-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===selMeal));
   closeM('food-modal');openM('fd-modal');
