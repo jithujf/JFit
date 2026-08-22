@@ -857,7 +857,15 @@ async function renderPhotos(){
   const lbl=photoWeekOff===0?'This week':photoWeekOff===-1?'Last week':new Date(wd).toLocaleDateString('en-AU',{month:'short',day:'numeric'});
   q('ph-wk-lbl').textContent=lbl;
   const {data:photos}=await sb.from('progress_photos').select('*').eq('user_id',CU.id).eq('week_date',wd);
-  const pm={};(photos||[]).forEach(p=>pm[p.angle]=p);
+  // Refresh signed URLs for display
+  const pm={};
+  for(const p of (photos||[])){
+    if(p.storage_path){
+      const {data:sd}=await sb.storage.from('progress-photos').createSignedUrl(p.storage_path,3600);
+      if(sd)p.photo_url=sd.signedUrl;
+    }
+    pm[p.angle]=p;
+  }
   q('angles-grid').innerHTML=ANGLES.map(a=>{
     const ph=pm[a];
     if(ph)return`<div class="angle-card" onclick="window.open('${ph.photo_url}','_blank')"><img src="${ph.photo_url}" alt="${a}"><div class="angle-lbl">${a}</div></div>`;
@@ -872,8 +880,10 @@ async function uploadPhoto(ev,angle,wd){
   const path=`${CU.id}/${wd}_${angle}.jpg`;
   const {error:ue}=await sb.storage.from('progress-photos').upload(path,file,{upsert:true});
   if(ue){toast('Upload failed');return;}
-  const {data:{publicUrl}}=sb.storage.from('progress-photos').getPublicUrl(path);
-  await sb.from('progress_photos').upsert({user_id:CU.id,week_date:wd,angle,photo_url:publicUrl});
+  // Use signed URL (expires in 1 year = 31536000 seconds) for private storage
+  const {data:signedData,error:signErr}=await sb.storage.from('progress-photos').createSignedUrl(path,31536000);
+  if(signErr){toast('Error saving photo');return;}
+  await sb.from('progress_photos').upsert({user_id:CU.id,week_date:wd,angle,photo_url:signedData.signedUrl,storage_path:path});
   renderPhotos();toast('Photo saved! 📸');
 }
 
