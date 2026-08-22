@@ -19,7 +19,7 @@ let photoWeekOff=0, photoWeeks=[];
 let curDayIdx=null, curExName=null, curExSets=3;
 let timerIv=null, timerSec=90, timerOn=false;
 let selMeal='breakfast', curFood=null, curYT='';
-let selGoal='deficit', selAct='moderate';
+let selGoal='deficit', selAct='moderate', selGender='male';
 let pickerDayId=0, progDayCount=0;
 let cmpAngle='Front', allProgs=[];
 const TODAY = new Date().toISOString().split('T')[0];
@@ -180,6 +180,10 @@ document.getElementById('root').innerHTML = `
   <p style="color:var(--text2);font-size:14px;margin-bottom:28px">Help JFit personalise your experience</p>
   <div class="setup-sec">
     <div class="setup-sec-t">Your Stats</div>
+    <div class="goal-btns" style="margin-bottom:8px">
+      <div class="g-btn active" id="g-male" onclick="setGender('male',this)">👨 Male</div>
+      <div class="g-btn" id="g-female" onclick="setGender('female',this)">👩 Female</div>
+    </div>
     <div class="setup-row">
       <input class="setup-inp" type="number" id="su-age" placeholder="Age" inputmode="numeric">
       <input class="setup-inp" type="number" id="su-ht" placeholder="Height (cm)" inputmode="decimal">
@@ -421,10 +425,22 @@ document.getElementById('root').innerHTML = `
   <div class="fs-box">
     <div class="modal-handle"></div>
     <div class="fs-hdr">
-      <h2 style="font-size:17px;font-weight:700">Add Food</h2>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <h2 style="font-size:17px;font-weight:700">Add Food</h2>
+        <div style="font-size:12px;color:var(--accent);font-weight:600" id="food-modal-meal-label"></div>
+      </div>
+      <!-- AI Input -->
+      <div style="background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px">✨ AI Food Parser</div>
+        <textarea id="ai-food-input" placeholder="Type what you ate e.g. 200g grilled chicken, cup of rice, glass of oat milk" style="width:100%;background:rgba(255,255,255,0.07);border:1px solid var(--accent-border);border-radius:var(--radius-xs);padding:10px;color:var(--text);font-size:14px;outline:none;resize:none;height:70px;font-family:inherit"></textarea>
+        <button id="ai-parse-btn" onclick="parseWithAI(q('ai-food-input').value, selMeal)" style="width:100%;margin-top:8px;padding:10px;background:var(--accent);border:none;border-radius:var(--radius-xs);color:white;font-size:14px;font-weight:700;cursor:pointer">Analyse with AI</button>
+      </div>
+      <div id="ai-results" style="margin-bottom:10px"></div>
+      <!-- Manual Search -->
+      <div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px">Or search manually</div>
       <div class="fs-row">
-        <input class="fs-inp" type="text" id="fs-inp" placeholder="Search food..." oninput="srchFood(this.value)">
-        <div class="scan-btn" onclick="toast('Barcode scan: open on phone camera')">📷</div>
+        <input class="fs-inp" type="text" id="fs-inp" placeholder="Search food database..." oninput="srchFood(this.value)">
+        <div class="scan-btn" onclick="toast('Use phone camera for barcode scan')">📷</div>
       </div>
     </div>
     <div class="food-results" id="food-res"><div class="food-loading">Search for food above</div></div>
@@ -585,12 +601,28 @@ function renderAll(){renderDash();renderWorkout();renderNut();renderPhotos();ren
 // ─── SETUP ────────────────────────────────────────────────────
 function setGoal(g,el){selGoal=g;document.querySelectorAll('.g-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');calcMacros();}
 function setAct(a,el){selAct=a;document.querySelectorAll('.a-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');calcMacros();}
-function openSetup(){toggleMenu();if(UP){q('su-cw').value=UP.current_weight||'';q('su-tw').value=UP.target_weight||'';q('su-ht').value=UP.height||'';if(UP.target_date)q('su-td').value=UP.target_date;}q('setup-page').classList.add('open');}
+function setGender(g,el){selGender=g;document.querySelectorAll('#g-male,#g-female').forEach(b=>b.classList.remove('active'));el.classList.add('active');calcMacros();}
+function openSetup(){
+  toggleMenu();
+  if(UP){
+    q('su-cw').value=UP.current_weight||'';
+    q('su-tw').value=UP.target_weight||'';
+    q('su-ht').value=UP.height||'';
+    if(UP.target_date)q('su-td').value=UP.target_date;
+    if(UP.gender){
+      selGender=UP.gender;
+      document.querySelectorAll('#g-male,#g-female').forEach(b=>b.classList.remove('active'));
+      const gb=q('g-'+UP.gender);if(gb)gb.classList.add('active');
+    }
+  }
+  q('setup-page').classList.add('open');
+}
 
 function calcMacros(){
   const age=parseInt(qv('su-age'))||0,ht=parseFloat(qv('su-ht'))||0,wt=parseFloat(qv('su-cw'))||0;
   if(!age||!ht||!wt)return null;
-  const bmr=10*wt+6.25*ht-5*age+5;
+  // Mifflin-St Jeor: male +5, female -161
+  const bmr=10*wt+6.25*ht-5*age+(selGender==='female'?-161:5);
   const am={sedentary:1.2,light:1.375,moderate:1.55,very:1.725}[selAct]||1.55;
   const tdee=Math.round(bmr*am);
   let cal=tdee;
@@ -608,7 +640,7 @@ async function calcAndSave(){
   const {error}=await sb.from('profiles').upsert({
     id:CU.id,name:CU.user_metadata?.full_name||CU.email,
     height:ht,current_weight:cw,target_weight:tw,target_date:td||null,
-    goal:selGoal,activity_level:selAct,
+    goal:selGoal,activity_level:selAct,gender:selGender,
     daily_calories:macros.cal,daily_protein:macros.pro,daily_carbs:macros.carb,daily_fat:macros.fat
   });
   if(!error){
@@ -795,10 +827,93 @@ function commonFoods(query){
   return db.filter(f=>f.product_name.toLowerCase().includes(q2)).slice(0,10);
 }
 
+
+// AI Food Parser
+async function parseWithAI(text, meal) {
+  if(!text.trim()) return;
+  const btn = q('ai-parse-btn');
+  btn.textContent = 'Analysing...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/nutrition', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text})
+    });
+    const data = await res.json();
+    if(data.error) throw new Error(data.error);
+    // Show results for review
+    window._aifoods = data.foods;
+    renderAIResults(data.foods, meal);
+  } catch(e) {
+    toast('Could not parse — try again');
+    console.error(e);
+  } finally {
+    btn.textContent = 'Analyse';
+    btn.disabled = false;
+  }
+}
+
+function renderAIResults(foods, meal) {
+  const total = {cal:0, pro:0, carb:0, fat:0};
+  foods.forEach(f=>{total.cal+=f.calories;total.pro+=f.protein;total.carb+=f.carbs;total.fat+=f.fat;});
+  q('ai-results').innerHTML = `
+    <div style="margin-bottom:12px">
+      ${foods.map((f,i)=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">${f.name}</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:2px">P:${f.protein}g · C:${f.carbs}g · F:${f.fat}g</div>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--accent)">${Math.round(f.calories)} kcal</div>
+          <div onclick="removeAIFood(${i})" style="color:var(--red);cursor:pointer;font-size:18px;padding:0 4px">×</div>
+        </div>`).join('')}
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--border2)">
+      <div>
+        <div style="font-size:12px;color:var(--text2)">Total</div>
+        <div style="font-size:13px;margin-top:2px">P:${Math.round(total.pro)}g · C:${Math.round(total.carb)}g · F:${Math.round(total.fat)}g</div>
+      </div>
+      <div style="font-size:20px;font-weight:800;color:var(--accent)">${Math.round(total.cal)} kcal</div>
+    </div>
+    <button class="btn-accent" style="margin-top:12px" onclick="addAIFoods('${meal}')">Add All to ${meal.charAt(0).toUpperCase()+meal.slice(1)}</button>
+  `;
+}
+
+function removeAIFood(i) {
+  window._aifoods.splice(i,1);
+  if(window._aifoods.length === 0) {q('ai-results').innerHTML='';return;}
+  renderAIResults(window._aifoods, selMeal);
+}
+
+async function addAIFoods(meal) {
+  if(!window._aifoods?.length) return;
+  const inserts = window._aifoods.map(f=>({
+    user_id:CU.id, food_name:f.name, brand:'AI estimated',
+    calories:f.calories, protein:f.protein, carbs:f.carbs, fat:f.fat,
+    quantity:f.quantity||100, unit:f.unit||'g', meal_type:meal, logged_at:TODAY
+  }));
+  const {data, error} = await sb.from('food_logs').insert(inserts).select();
+  if(!error && data) {
+    foodLogs.push(...data);
+    closeM('food-modal');
+    renderNut(); renderDash();
+    toast('Added to '+meal+'! 🍽️');
+    window._aifoods = [];
+    q('ai-food-input').value = '';
+    q('ai-results').innerHTML = '';
+  }
+}
+
 let fsTimer=null;
 function openFoodSearch(meal){
-  selMeal=meal;q('fs-inp').value='';q('food-res').innerHTML='<div class="food-loading">Search for food above</div>';
+  selMeal=meal;
+  if(q('fs-inp'))q('fs-inp').value='';
+  if(q('food-res'))q('food-res').innerHTML='<div class="food-loading">Search for food above</div>';
+  if(q('ai-food-input'))q('ai-food-input').value='';
+  if(q('ai-results'))q('ai-results').innerHTML='';
   document.querySelectorAll('.mt-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===meal));
+  q('food-modal-meal-label').textContent='Adding to: '+meal.charAt(0).toUpperCase()+meal.slice(1);
   openM('food-modal');
 }
 function srchFood(val){
