@@ -147,8 +147,11 @@ const PPL = {
 document.getElementById('root').innerHTML = `
 <!-- AUTH -->
 <div class="auth-wrap hidden" id="auth-page">
-  <div class="auth-logo">J<span>Fit</span></div>
-  <div class="auth-tag">Your fitness journey starts here</div>
+  <div class="auth-logo-wrap">
+    <img src="https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/logo.png" class="auth-logo-img" alt="JFit logo">
+    <div class="auth-logo-name">J<span>Fit</span></div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;position:relative">Your fitness journey starts here</div>
+  </div>
   <div class="auth-card">
     <div class="auth-tabs">
       <div class="auth-tab active" onclick="authTab('login')">Log In</div>
@@ -226,10 +229,10 @@ document.getElementById('root').innerHTML = `
 <div class="page-scroll">
 
 <!-- DASHBOARD -->
-<div class="page active" id="page-dashboard">
-  <div class="ph">
+<div class="page active" id="page-dashboard"><div class="page-bg bg-dashboard" aria-hidden="true"></div>
+  <div class="ph ph-with-bg">
     <div class="ph-row">
-      <div><div class="ph" style="padding:0"><h1 id="d-greet">Good morning 👋</h1><p id="d-date"></p></div></div>
+      <div><h1 id="d-greet" style="font-size:24px;font-weight:700;color:white">Good morning 👋</h1><p id="d-date" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px"></p></div>
       <div class="avatar" id="av-btn" onclick="toggleMenu()">J</div>
     </div>
   </div>
@@ -271,14 +274,14 @@ document.getElementById('root').innerHTML = `
 </div>
 
 <!-- WORKOUT -->
-<div class="page" id="page-workout">
-  <div class="ph"><h1>Workout</h1><p id="wk-date"></p></div>
+<div class="page" id="page-workout"><div class="page-bg bg-workout" aria-hidden="true"></div>
+  <div class="ph ph-with-bg" style="padding-bottom:20px"><h1 style="color:white;font-size:24px;font-weight:700">Workout</h1><p id="wk-date" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px"></p></div>
   <div id="wk-list"></div>
 </div>
 
 <!-- NUTRITION -->
-<div class="page" id="page-nutrition">
-  <div class="ph"><h1>Nutrition</h1><p id="nut-date"></p></div>
+<div class="page" id="page-nutrition"><div class="page-bg bg-nutrition" aria-hidden="true"></div>
+  <div class="ph ph-with-bg" style="padding-bottom:20px"><h1 style="color:white;font-size:24px;font-weight:700">Nutrition</h1><p id="nut-date" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px"></p></div>
   <div class="sec">
     <div class="gc" style="padding:16px">
       <div style="display:flex;align-items:baseline;gap:6px">
@@ -310,8 +313,8 @@ document.getElementById('root').innerHTML = `
 </div>
 
 <!-- BODY -->
-<div class="page" id="page-body">
-  <div class="ph"><h1>Body Stats</h1><p>Weight & measurements</p></div>
+<div class="page" id="page-body"><div class="page-bg bg-body" aria-hidden="true"></div>
+  <div class="ph ph-with-bg" style="padding-bottom:20px"><h1 style="color:white;font-size:24px;font-weight:700">Body Stats</h1><p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px">Weight & measurements</p></div>
   <div class="sec">
     <div class="sec-lbl">Weight Log</div>
     <div class="gc" style="padding:16px;margin-bottom:10px">
@@ -357,7 +360,7 @@ document.getElementById('root').innerHTML = `
 
 <!-- PROGRAMS -->
 <div class="page" id="page-programs">
-  <div class="ph"><h1>Programs</h1><p>Switch or create your plan</p></div>
+  <div class="ph" style="padding-top:calc(var(--safe-t) + 20px)"><h1 style="font-size:24px;font-weight:700">Programs</h1><p style="color:var(--text2);font-size:13px;margin-top:3px">Switch or create your plan</p></div>
   <div class="prog-list" id="prog-list"></div>
   <button class="gc create-prog-btn" onclick="openCreateProg()">+ Create Custom Program</button>
 </div>
@@ -661,7 +664,7 @@ function renderDash(){
   const now=new Date(),hr=now.getHours();
   const greet=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
   const name=(p.name||'').split(' ')[0]||'there';
-  q('d-greet').textContent=greet+' '+name+' 👋';
+  q('d-greet').textContent=greet+', '+name+' 👋';
   q('d-date').textContent=now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
   q('av-btn').textContent=(name[0]||'J').toUpperCase();
   if(p.current_weight&&p.target_weight){

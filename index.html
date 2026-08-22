@@ -9,7 +9,8 @@
 <meta name="apple-mobile-web-app-title" content="JFit">
 <meta name="theme-color" content="#0a0a0f">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
 <link rel="stylesheet" href="styles.css">
 <title>JFit</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -22,7 +23,11 @@
 </style>
 </head>
 <body>
-<div id="loading"><div class="logo">J<span>Fit</span></div><div class="spin"></div></div>
+<div id="loading">
+  <img src="https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/logo.png" style="width:100px;height:100px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(232,115,74,0.5));margin-bottom:8px" alt="JFit">
+  <div class="logo" style="margin-bottom:16px">J<span>Fit</span></div>
+  <div class="spin"></div>
+</div>
 <div id="root"></div>
 <script src="app.js"></script>
 </body>
