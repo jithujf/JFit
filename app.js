@@ -196,9 +196,10 @@ document.getElementById('root').innerHTML = `
   </div>
   <div class="setup-sec">
     <div class="setup-sec-t">Your Goal</div>
-    <div class="goal-btns">
+    <div class="goal-btns" style="flex-wrap:wrap">
       <div class="g-btn active" id="g-deficit" onclick="setGoal('deficit',this)">🔥 Lose Fat</div>
       <div class="g-btn" id="g-surplus" onclick="setGoal('surplus',this)">💪 Build Muscle</div>
+      <div class="g-btn" id="g-recomp" onclick="setGoal('recomp',this)">⚡ Lose Fat & Build Muscle</div>
       <div class="g-btn" id="g-maintain" onclick="setGoal('maintain',this)">⚖️ Maintain</div>
     </div>
   </div>
@@ -628,7 +629,10 @@ function calcMacros(){
   let cal=tdee;
   if(selGoal==='deficit')cal=tdee-500;
   else if(selGoal==='surplus')cal=tdee+300;
-  const pro=Math.round(wt*2),fat=Math.round(cal*0.25/9),carb=Math.round((cal-pro*4-fat*9)/4);
+  else if(selGoal==='recomp')cal=tdee-200; // Small deficit, higher protein
+  // Recomp needs higher protein (2.2g/kg) to preserve muscle while losing fat
+  const proMult=selGoal==='recomp'?2.4:2;
+  const pro=Math.round(wt*proMult),fat=Math.round(cal*0.25/9),carb=Math.round((cal-pro*4-fat*9)/4);
   q('calc-box').style.display='block';
   q('cc').textContent=cal+' kcal';q('cp').textContent=pro+'g';q('ccb').textContent=carb+'g';q('cf').textContent=fat+'g';
   return{cal,pro,carb,fat};
