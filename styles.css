@@ -270,66 +270,139 @@ input[type=number]{-moz-appearance:textfield}
 input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
 .empty-state{text-align:center;padding:40px 20px;color:var(--text2);font-size:14px;line-height:1.7}
 
-/* ─── BACKGROUND IMAGES ─────────────────────────────────────── */
-.page-bg {
+
+/* ─── FULL SCREEN BACKGROUND SYSTEM ────────────────────────── */
+.page { position: relative; }
+
+.page-bg-full {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 280px;
+  inset: 0;
   background-size: cover;
-  background-position: center top;
+  background-position: center center;
+  background-repeat: no-repeat;
   z-index: 0;
-  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
-.page-bg::after {
+.page-bg-full::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,10,15,0.4) 0%, rgba(10,10,15,0.75) 60%, #0a0a0f 100%);
+  background: rgba(5,5,10,0.55);
 }
-.bg-dashboard { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/dashboard-bg.jpg'); background-position: center 30%; }
-.bg-workout { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/workout-bg.png'); background-position: center center; }
-.bg-nutrition { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/nutrition-bg.png'); background-position: center center; }
-.bg-body { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/body-bg.jpg'); background-position: center 20%; }
 
-/* ─── AUTH PAGE REDESIGN ─────────────────────────────────────── */
+/* Per-page backgrounds */
+.bg-dashboard-full { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/dashboard-bg.jpg'); }
+.bg-workout-full { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/workout-bg.png'); }
+.bg-nutrition-full { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/nutrition-bg.png'); }
+.bg-body-full { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/body-bg.jpg'); }
+.bg-auth-full { background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/dashboard-bg.jpg'); background-position: center 30%; }
+
+/* Hide bg when not on that page */
+.page-bg-full { opacity: 0; pointer-events: none; }
+.page-bg-full.visible { opacity: 1; }
+
+/* ─── GLASSMORPHISM CARDS ────────────────────────────────────── */
+.gc {
+  background: rgba(10,10,18,0.55) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+.goal-card {
+  background: linear-gradient(135deg, rgba(232,115,74,0.25) 0%, rgba(91,156,246,0.12) 100%) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(232,115,74,0.3) !important;
+}
+
+/* ─── GLASSMORPHISM MODALS ───────────────────────────────────── */
+.modal-box {
+  background: rgba(8,8,16,0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+/* ─── GLASSMORPHISM NAV ──────────────────────────────────────── */
+.bottom-nav {
+  background: rgba(5,5,12,0.75) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* ─── SECTION Z-INDEX ────────────────────────────────────────── */
+.sec { position: relative; z-index: 2; }
+.page-scroll { z-index: 1; }
+.ph { position: relative; z-index: 2; }
+.ph h1 { color: white !important; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+.ph p { color: rgba(255,255,255,0.6) !important; }
+.ph-row { position: relative; z-index: 2; }
+
+/* ─── GLASS DAY CARDS ────────────────────────────────────────── */
+.day-card {
+  background: rgba(10,10,18,0.55) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* ─── GLASS MEAL CARDS ───────────────────────────────────────── */
+.meal-sec .gc {
+  background: rgba(10,10,18,0.6) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* ─── GLASS WEIGHT CARDS ─────────────────────────────────────── */
+.weight-log-card, .bmi-card, .meas-form {
+  background: rgba(10,10,18,0.55) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* ─── GLASS PROG CARDS ───────────────────────────────────────── */
+.prog-card {
+  background: rgba(10,10,18,0.55) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* ─── AUTH REDESIGN ──────────────────────────────────────────── */
 .auth-wrap {
+  background: transparent !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+}
+.auth-wrap::before { display: none !important; }
+
+.auth-card {
+  background: rgba(8,8,16,0.7) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+.auth-logo-wrap { display: flex; flex-direction: column; align-items: center; position: relative; margin-bottom: 28px; }
+.auth-logo-img { width: 90px; height: 90px; object-fit: contain; filter: drop-shadow(0 0 24px rgba(232,115,74,0.6)); margin-bottom: 6px; }
+.auth-logo { display: none !important; }
+.auth-logo-name { font-size: 34px; font-weight: 800; letter-spacing: -1.5px; color: white; }
+.auth-logo-name span { color: var(--accent); }
+.auth-tag { color: rgba(255,255,255,0.5) !important; position: relative; }
+
+/* ─── LOADING SCREEN ─────────────────────────────────────────── */
+#loading {
   background: #0a0a0f !important;
   background-image: url('https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/dashboard-bg.jpg') !important;
   background-size: cover !important;
   background-position: center 30% !important;
 }
-.auth-wrap::before {
-  background: linear-gradient(180deg, rgba(10,10,15,0.5) 0%, rgba(10,10,15,0.85) 50%, rgba(10,10,15,0.97) 100%) !important;
+#loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,12,0.65);
 }
-.auth-logo-img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 30px rgba(232,115,74,0.5));
-  margin-bottom: 8px;
-  position: relative;
-}
-.auth-logo { display: none !important; }
-.auth-logo-wrap { display: flex; flex-direction: column; align-items: center; position: relative; margin-bottom: 32px; }
-.auth-logo-name { font-size: 36px; font-weight: 800; letter-spacing: -1.5px; color: #f0f0ee; }
-.auth-logo-name span { color: var(--accent); }
-
-/* ─── PAGE HEADER WITH BG ────────────────────────────────────── */
-.ph-with-bg { padding-top: calc(var(--safe-t) + 20px); position: relative; z-index: 2; }
-.ph-with-bg h1 { text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.ph-with-bg p { text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-
-/* ─── ENHANCED CARDS ─────────────────────────────────────────── */
-.gc { background: rgba(12,12,20,0.8) !important; }
-.goal-card { background: linear-gradient(135deg, rgba(232,115,74,0.18) 0%, rgba(91,156,246,0.08) 100%) !important; }
-
-/* ─── ENHANCED STAT CARDS ────────────────────────────────────── */
-.stat-card { position: relative; overflow: hidden; }
-.stat-card::before { content: ''; position: absolute; top: -20px; right: -20px; width: 60px; height: 60px; border-radius: 50%; background: rgba(232,115,74,0.08); pointer-events: none; }
-
-/* ─── NAV ENHANCEMENT ────────────────────────────────────────── */
-.bottom-nav { background: rgba(8,8,14,0.92) !important; }
-
-/* ─── SECTION RELATIVE Z-INDEX ───────────────────────────────── */
-.sec { position: relative; z-index: 2; }
-.page-scroll { z-index: 1; }
+#loading img, #loading .logo, #loading .spin { position: relative; z-index: 1; }

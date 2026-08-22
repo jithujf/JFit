@@ -146,6 +146,7 @@ const PPL = {
 // ─── HTML SKELETON ────────────────────────────────────────────
 document.getElementById('root').innerHTML = `
 <!-- AUTH -->
+<div class="page-bg-full bg-auth-full visible" id="bg-auth" aria-hidden="true"></div>
 <div class="auth-wrap hidden" id="auth-page">
   <div class="auth-logo-wrap">
     <img src="https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/logo.png" class="auth-logo-img" alt="JFit logo">
@@ -226,10 +227,14 @@ document.getElementById('root').innerHTML = `
 
 <!-- MAIN APP -->
 <div id="main-app" class="hidden">
+<div class="page-bg-full bg-dashboard-full" id="bg-dashboard" aria-hidden="true"></div>
+<div class="page-bg-full bg-workout-full" id="bg-workout" aria-hidden="true"></div>
+<div class="page-bg-full bg-nutrition-full" id="bg-nutrition" aria-hidden="true"></div>
+<div class="page-bg-full bg-body-full" id="bg-body" aria-hidden="true"></div>
 <div class="page-scroll">
 
 <!-- DASHBOARD -->
-<div class="page active" id="page-dashboard"><div class="page-bg bg-dashboard" aria-hidden="true"></div>
+<div class="page active" id="page-dashboard">
   <div class="ph ph-with-bg">
     <div class="ph-row">
       <div><h1 id="d-greet" style="font-size:24px;font-weight:700;color:white">Good morning 👋</h1><p id="d-date" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px"></p></div>
@@ -274,13 +279,13 @@ document.getElementById('root').innerHTML = `
 </div>
 
 <!-- WORKOUT -->
-<div class="page" id="page-workout"><div class="page-bg bg-workout" aria-hidden="true"></div>
+<div class="page" id="page-workout">
   <div class="ph ph-with-bg" style="padding-bottom:20px"><h1 style="color:white;font-size:24px;font-weight:700">Workout</h1><p id="wk-date" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px"></p></div>
   <div id="wk-list"></div>
 </div>
 
 <!-- NUTRITION -->
-<div class="page" id="page-nutrition"><div class="page-bg bg-nutrition" aria-hidden="true"></div>
+<div class="page" id="page-nutrition">
   <div class="ph ph-with-bg" style="padding-bottom:20px"><h1 style="color:white;font-size:24px;font-weight:700">Nutrition</h1><p id="nut-date" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px"></p></div>
   <div class="sec">
     <div class="gc" style="padding:16px">
@@ -302,7 +307,7 @@ document.getElementById('root').innerHTML = `
 
 <!-- PHOTOS -->
 <div class="page" id="page-photos">
-  <div class="ph"><h1>Progress Photos</h1><p>Log weekly — compare your journey</p></div>
+  <div class="ph" style="position:relative;z-index:2"><h1 style="color:white;font-size:24px;font-weight:700">Progress Photos</h1><p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px">Log weekly — compare your journey</p></div>
   <div class="gc wk-sel" style="margin:0 16px 16px">
     <button class="wk-nav" onclick="chgPhotoWk(-1)">‹</button>
     <div style="font-size:15px;font-weight:600" id="ph-wk-lbl">This week</div>
@@ -313,7 +318,7 @@ document.getElementById('root').innerHTML = `
 </div>
 
 <!-- BODY -->
-<div class="page" id="page-body"><div class="page-bg bg-body" aria-hidden="true"></div>
+<div class="page" id="page-body">
   <div class="ph ph-with-bg" style="padding-bottom:20px"><h1 style="color:white;font-size:24px;font-weight:700">Body Stats</h1><p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px">Weight & measurements</p></div>
   <div class="sec">
     <div class="sec-lbl">Weight Log</div>
@@ -591,7 +596,9 @@ async function loadData(){
 function showApp(){
   q('loading').style.display='none';
   q('auth-page').classList.add('hidden');
+  q('bg-auth')?.classList.remove('visible');
   q('main-app').classList.remove('hidden');
+  q('bg-dashboard')?.classList.add('visible');
   if(!UP?.daily_calories){q('setup-page').classList.add('open');}
   else{renderAll();}
 }
@@ -599,6 +606,10 @@ function showAuth(){
   q('loading').style.display='none';
   q('auth-page').classList.remove('hidden');
   q('main-app').classList.add('hidden');
+  q('bg-auth')?.classList.add('visible');
+  document.querySelectorAll('.page-bg-full').forEach(b=>{
+    if(b.id!=='bg-auth') b.classList.remove('visible');
+  });
 }
 function renderAll(){renderDash();renderWorkout();renderNut();renderPhotos();renderBody();renderProgs();}
 
@@ -1142,11 +1153,17 @@ function goPage(id,btn){
   q('page-'+id)?.classList.add('active');
   if(btn)btn.classList.add('active');
   document.querySelector('.page-scroll')?.scrollTo(0,0);
+  // Switch background image
+  const bgMap={dashboard:'bg-dashboard',workout:'bg-workout',nutrition:'bg-nutrition',body:'bg-body'};
+  document.querySelectorAll('.page-bg-full').forEach(b=>{
+    if(b.id!=='bg-auth') b.classList.remove('visible');
+  });
+  if(bgMap[id]) q(bgMap[id])?.classList.add('visible');
   if(id==='nutrition')renderNut();
   if(id==='photos')renderPhotos();
   if(id==='body')renderBody();
   if(id==='programs')renderProgs();
-  if(id==='dashboard')renderDash();
+  if(id==='dashboard'){renderDash();q('bg-dashboard')?.classList.add('visible');}
 }
 
 function toggleMenu(){q('prof-menu').classList.toggle('open');}
