@@ -143,6 +143,213 @@ const PPL = {
   ]
 };
 
+// ─── ALL BUILT-IN PROGRAMS ────────────────────────────────────
+const ALL_PROGRAMS = [
+  {
+    id:'ppl-elite',
+    name:'PPL Elite — 5 Day',
+    subtitle:'Push · Pull · Legs · Push+Abs · Pull+Legs',
+    level:'Intermediate',
+    days_per_week:5,
+    icon:'🏋️',
+    color:'var(--accent)',
+    color_bg:'var(--accent-bg)',
+    description:'Your signature 5-day Push Pull Legs split.',
+    days: PPL.days
+  },
+  {
+    id:'beginner-foundation',
+    name:'Beginner Foundation — 3 Day',
+    subtitle:'Full body 3x per week',
+    level:'Beginner',
+    days_per_week:3,
+    icon:'🌱',
+    color:'#52c47a',
+    color_bg:'rgba(82,196,122,0.12)',
+    description:'Perfect starting point. Full body training 3 days a week.',
+    days:[
+      {name:'Day A — Full Body',label:'Day A',type:'push',exercises:[
+        {name:'Leg Press',sets:3,reps:'10–15'},{name:'Leg Extension',sets:3,reps:'12–15'},
+        {name:'Seated Leg Curl',sets:3,reps:'12–15'},{name:'Machine Chest Press',sets:3,reps:'10–12'},
+        {name:'Lat Pulldown Wide Grip',sets:3,reps:'10–12'},{name:'Machine Shoulder Press',sets:3,reps:'10–12'},
+        {name:'Cable Bicep Curl',sets:2,reps:'12–15'},{name:'Tricep Pushdown',sets:2,reps:'12–15'},
+        {name:'Standing Calf Raise Machine',sets:3,reps:'15–20'},{name:'Plank',sets:3,reps:'20–30s'},
+      ]},
+      {name:'Day B — Full Body',label:'Day B',type:'pull',exercises:[
+        {name:'Hack Squat Machine',sets:3,reps:'10–12'},{name:'Lying Leg Curl',sets:3,reps:'12–15'},
+        {name:'Incline Machine Chest Press',sets:3,reps:'10–12'},{name:'Seated Cable Row',sets:3,reps:'10–12'},
+        {name:'Cable Lateral Raise',sets:3,reps:'12–15'},{name:'Machine Preacher Curls',sets:2,reps:'12–15'},
+        {name:'Overhead Cable Extension',sets:2,reps:'12–15'},{name:'Seated Calf Raise',sets:3,reps:'15–20'},
+        {name:'Hanging Knee Raise',sets:3,reps:'10–15'},
+      ]},
+      {name:'Day C — Full Body',label:'Day C',type:'legs',exercises:[
+        {name:'Leg Press',sets:4,reps:'10–15'},{name:'Leg Extension',sets:3,reps:'12–15'},
+        {name:'Seated Leg Curl',sets:3,reps:'12–15'},{name:'Pec Deck Fly',sets:3,reps:'12–15'},
+        {name:'Machine High Row',sets:3,reps:'10–12'},{name:'Machine Lateral Raise',sets:3,reps:'12–15'},
+        {name:'Hammer Curl (Rope Cable)',sets:2,reps:'12–15'},{name:'Cable Kickback',sets:2,reps:'12–15'},
+        {name:'Standing Calf Raise Machine',sets:3,reps:'15–20'},{name:'Cable Crunch',sets:3,reps:'15–20'},
+      ]},
+    ]
+  },
+  {
+    id:'upper-lower',
+    name:'Upper Lower Split — 4 Day',
+    subtitle:'Upper · Lower · Upper · Lower',
+    level:'Intermediate',
+    days_per_week:4,
+    icon:'⚡',
+    color:'#5b9cf6',
+    color_bg:'rgba(91,156,246,0.12)',
+    description:'Hit each muscle group twice per week.',
+    days:[
+      {name:'Upper A — Strength',label:'Upper A',type:'push',exercises:[
+        {name:'Machine Chest Press',sets:4,reps:'6–10'},{name:'Lat Pulldown Wide Grip',sets:4,reps:'6–10'},
+        {name:'Machine Shoulder Press',sets:3,reps:'8–12'},{name:'Seated Cable Row',sets:3,reps:'8–12'},
+        {name:'Cable Lateral Raise',sets:3,reps:'12–15'},{name:'Machine Preacher Curls',sets:3,reps:'8–12'},
+        {name:'Tricep Pushdown',sets:3,reps:'8–12'},
+      ]},
+      {name:'Lower A — Strength',label:'Lower A',type:'legs',exercises:[
+        {name:'Leg Press',sets:4,reps:'6–10'},{name:'Hack Squat Machine',sets:3,reps:'8–12'},
+        {name:'Leg Extension',sets:3,reps:'10–15'},{name:'Seated Leg Curl',sets:3,reps:'10–15'},
+        {name:'Romanian Deadlift (Dumbbell)',sets:3,reps:'8–12'},{name:'Standing Calf Raise Machine',sets:4,reps:'12–15'},
+      ]},
+      {name:'Upper B — Hypertrophy',label:'Upper B',type:'pull',exercises:[
+        {name:'Incline Machine Chest Press',sets:4,reps:'10–15'},{name:'Chest Supported Row Machine',sets:4,reps:'10–15'},
+        {name:'Pec Deck Fly',sets:3,reps:'12–15'},{name:'Close Grip Lat Pulldown',sets:3,reps:'10–15'},
+        {name:'Machine Lateral Raise',sets:3,reps:'12–15'},{name:'Rear Delt Machine',sets:3,reps:'12–15'},
+        {name:'Cable Bicep Curl',sets:3,reps:'12–15'},{name:'Overhead Cable Extension',sets:3,reps:'12–15'},
+      ]},
+      {name:'Lower B — Hypertrophy',label:'Lower B',type:'legs',exercises:[
+        {name:'Bulgarian Split Squat',sets:3,reps:'10–12'},{name:'Leg Extension',sets:4,reps:'12–15'},
+        {name:'Lying Leg Curl',sets:3,reps:'12–15'},{name:'Hip Thrust Machine',sets:3,reps:'10–12'},
+        {name:'Glute Bridge Machine',sets:3,reps:'12–15'},{name:'Seated Calf Raise',sets:4,reps:'15–20'},
+        {name:'Cable Crunch',sets:3,reps:'15–20'},
+      ]},
+    ]
+  },
+  {
+    id:'full-body-power',
+    name:'Full Body Power — 3 Day',
+    subtitle:'Mon · Wed · Fri full body',
+    level:'Intermediate',
+    days_per_week:3,
+    icon:'💥',
+    color:'#b57bee',
+    color_bg:'rgba(181,123,238,0.12)',
+    description:'High frequency full body training.',
+    days:[
+      {name:'Day 1 — Power',label:'Day 1',type:'push',exercises:[
+        {name:'Leg Press',sets:4,reps:'8–12'},{name:'Machine Chest Press',sets:4,reps:'8–12'},
+        {name:'Lat Pulldown Wide Grip',sets:4,reps:'8–12'},{name:'Machine Shoulder Press',sets:3,reps:'8–12'},
+        {name:'Machine Preacher Curls',sets:3,reps:'10–12'},{name:'Tricep Pushdown',sets:3,reps:'10–12'},
+        {name:'Standing Calf Raise Machine',sets:3,reps:'12–15'},{name:'Cable Crunch',sets:3,reps:'15–20'},
+      ]},
+      {name:'Day 2 — Hypertrophy',label:'Day 2',type:'pull',exercises:[
+        {name:'Hack Squat Machine',sets:4,reps:'10–15'},{name:'Incline Machine Chest Press',sets:4,reps:'10–15'},
+        {name:'Seated Cable Row',sets:4,reps:'10–15'},{name:'Cable Lateral Raise',sets:3,reps:'12–15'},
+        {name:'Cable Bicep Curl',sets:3,reps:'12–15'},{name:'Overhead Cable Extension',sets:3,reps:'12–15'},
+        {name:'Seated Calf Raise',sets:3,reps:'15–20'},{name:'Hanging Knee Raise',sets:3,reps:'12–15'},
+      ]},
+      {name:'Day 3 — Strength',label:'Day 3',type:'legs',exercises:[
+        {name:'Leg Press',sets:4,reps:'6–10'},{name:'Pec Deck Fly',sets:3,reps:'12–15'},
+        {name:'Machine High Row',sets:4,reps:'8–12'},{name:'Rear Delt Machine',sets:3,reps:'12–15'},
+        {name:'Hammer Curl (Rope Cable)',sets:3,reps:'12–15'},{name:'Cable Kickback',sets:3,reps:'12–15'},
+        {name:'Hip Thrust Machine',sets:3,reps:'10–12'},{name:'Plank',sets:3,reps:'45s'},
+      ]},
+    ]
+  },
+  {
+    id:'bro-split',
+    name:'Classic Bro Split — 5 Day',
+    subtitle:'Chest · Back · Shoulders · Arms · Legs',
+    level:'Intermediate',
+    days_per_week:5,
+    icon:'💪',
+    color:'#f0b840',
+    color_bg:'rgba(240,184,64,0.12)',
+    description:'The classic bodybuilding split.',
+    days:[
+      {name:'Chest Day',label:'Chest',type:'push',exercises:[
+        {name:'Machine Chest Press',sets:4,reps:'8–12'},{name:'Incline Machine Chest Press',sets:4,reps:'10–12'},
+        {name:'Flat Machine Press',sets:3,reps:'10–12'},{name:'Pec Deck Fly',sets:3,reps:'12–15'},
+        {name:'Cable Chest Fly (Low to High)',sets:3,reps:'12–15'},{name:'Cable Chest Fly (High to Low)',sets:3,reps:'12–15'},
+        {name:'Dips (Chest Focus)',sets:3,reps:'10–15'},
+      ]},
+      {name:'Back Day',label:'Back',type:'pull',exercises:[
+        {name:'Lat Pulldown Wide Grip',sets:4,reps:'8–12'},{name:'Close Grip Lat Pulldown',sets:3,reps:'10–12'},
+        {name:'Seated Cable Row',sets:4,reps:'8–12'},{name:'Chest Supported Row Machine',sets:3,reps:'10–12'},
+        {name:'Machine High Row',sets:3,reps:'10–12'},{name:'Straight Arm Pulldown',sets:3,reps:'12–15'},
+        {name:'Face Pull (Cable)',sets:3,reps:'15–20'},
+      ]},
+      {name:'Shoulder Day',label:'Shoulders',type:'push',exercises:[
+        {name:'Machine Shoulder Press',sets:4,reps:'8–12'},{name:'Cable Lateral Raise',sets:4,reps:'12–15'},
+        {name:'Machine Lateral Raise',sets:3,reps:'12–15'},{name:'Rear Delt Machine',sets:4,reps:'12–15'},
+        {name:'Cable Front Raise',sets:3,reps:'12–15'},{name:'Shrugs (Dumbbell)',sets:3,reps:'12–15'},
+      ]},
+      {name:'Arms Day',label:'Arms',type:'pull',exercises:[
+        {name:'Machine Preacher Curls',sets:4,reps:'10–12'},{name:'Cable Bicep Curl',sets:3,reps:'12–15'},
+        {name:'Hammer Curl (Rope Cable)',sets:3,reps:'12–15'},{name:'Incline Bench Cable Curl',sets:3,reps:'10–12'},
+        {name:'Tricep Pushdown',sets:4,reps:'10–12'},{name:'Overhead Cable Extension',sets:3,reps:'12–15'},
+        {name:'Cable Kickback',sets:3,reps:'12–15'},{name:'Rope Pushdown',sets:3,reps:'12–15'},
+      ]},
+      {name:'Legs Day',label:'Legs',type:'legs',exercises:[
+        {name:'Leg Press',sets:4,reps:'8–12'},{name:'Hack Squat Machine',sets:4,reps:'10–12'},
+        {name:'Leg Extension',sets:3,reps:'12–15'},{name:'Seated Leg Curl',sets:3,reps:'10–12'},
+        {name:'Lying Leg Curl',sets:3,reps:'12–15'},{name:'Hip Thrust Machine',sets:3,reps:'10–12'},
+        {name:'Standing Calf Raise Machine',sets:4,reps:'12–15'},{name:'Seated Calf Raise',sets:3,reps:'15–20'},
+      ]},
+    ]
+  },
+  {
+    id:'arnold-split',
+    name:'Arnold Split — 6 Day',
+    subtitle:'Chest+Back · Shoulders+Arms · Legs (×2)',
+    level:'Advanced',
+    days_per_week:6,
+    icon:'🦁',
+    color:'#e8734a',
+    color_bg:'rgba(232,115,74,0.12)',
+    description:'The legendary Arnold Schwarzenegger split.',
+    days:[
+      {name:'Chest + Back A',label:'Day 1',type:'push',exercises:[
+        {name:'Machine Chest Press',sets:4,reps:'8–12'},{name:'Lat Pulldown Wide Grip',sets:4,reps:'8–12'},
+        {name:'Incline Machine Chest Press',sets:3,reps:'10–12'},{name:'Seated Cable Row',sets:3,reps:'10–12'},
+        {name:'Pec Deck Fly',sets:3,reps:'12–15'},{name:'Straight Arm Pulldown',sets:3,reps:'12–15'},
+        {name:'Cable Chest Fly (Low to High)',sets:3,reps:'12–15'},{name:'Face Pull (Cable)',sets:3,reps:'15–20'},
+      ]},
+      {name:'Shoulders + Arms A',label:'Day 2',type:'pull',exercises:[
+        {name:'Machine Shoulder Press',sets:4,reps:'8–12'},{name:'Machine Preacher Curls',sets:4,reps:'10–12'},
+        {name:'Cable Lateral Raise',sets:3,reps:'12–15'},{name:'Tricep Pushdown',sets:4,reps:'10–12'},
+        {name:'Rear Delt Machine',sets:3,reps:'12–15'},{name:'Cable Bicep Curl',sets:3,reps:'12–15'},
+        {name:'Overhead Cable Extension',sets:3,reps:'12–15'},{name:'Hammer Curl (Rope Cable)',sets:3,reps:'12–15'},
+      ]},
+      {name:'Legs A',label:'Day 3',type:'legs',exercises:[
+        {name:'Leg Press',sets:4,reps:'8–12'},{name:'Hack Squat Machine',sets:4,reps:'10–12'},
+        {name:'Leg Extension',sets:3,reps:'12–15'},{name:'Seated Leg Curl',sets:3,reps:'10–12'},
+        {name:'Lying Leg Curl',sets:3,reps:'12–15'},{name:'Standing Calf Raise Machine',sets:4,reps:'12–15'},
+      ]},
+      {name:'Chest + Back B',label:'Day 4',type:'push',exercises:[
+        {name:'Flat Machine Press',sets:4,reps:'8–12'},{name:'Chest Supported Row Machine',sets:4,reps:'8–12'},
+        {name:'Cable Chest Fly (High to Low)',sets:3,reps:'12–15'},{name:'Close Grip Lat Pulldown',sets:3,reps:'10–12'},
+        {name:'Rear Delt Machine',sets:3,reps:'12–15'},{name:'Machine High Row',sets:3,reps:'10–12'},
+        {name:'Dips (Chest Focus)',sets:3,reps:'10–15'},{name:'Straight Arm Pulldown',sets:3,reps:'12–15'},
+      ]},
+      {name:'Shoulders + Arms B',label:'Day 5',type:'pull',exercises:[
+        {name:'Machine Lateral Raise',sets:4,reps:'12–15'},{name:'Incline Bench Cable Curl',sets:4,reps:'10–12'},
+        {name:'Cable Front Raise',sets:3,reps:'12–15'},{name:'Rope Pushdown',sets:4,reps:'12–15'},
+        {name:'Shrugs (Dumbbell)',sets:3,reps:'12–15'},{name:'Concentration Curl',sets:3,reps:'12–15'},
+        {name:'Cable Kickback',sets:3,reps:'12–15'},
+      ]},
+      {name:'Legs B',label:'Day 6',type:'legs',exercises:[
+        {name:'Bulgarian Split Squat',sets:3,reps:'10–12'},{name:'Leg Extension',sets:4,reps:'12–15'},
+        {name:'Lying Leg Curl',sets:3,reps:'12–15'},{name:'Hip Thrust Machine',sets:4,reps:'10–12'},
+        {name:'Glute Bridge Machine',sets:3,reps:'12–15'},{name:'Seated Calf Raise',sets:4,reps:'15–20'},
+        {name:'Cable Crunch',sets:3,reps:'15–20'},{name:'Hanging Knee Raise',sets:3,reps:'12–15'},
+      ]},
+    ]
+  },
+];
+
 // ─── HTML SKELETON ────────────────────────────────────────────
 document.getElementById('root').innerHTML = `
 <!-- AUTH -->
