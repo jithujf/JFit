@@ -149,7 +149,7 @@ document.getElementById('root').innerHTML = `
 <div class="page-bg-full bg-auth-full visible" id="bg-auth" aria-hidden="true"></div>
 <div class="auth-wrap hidden" id="auth-page">
   <div class="auth-logo-wrap">
-    <img src="https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/logo.png" class="auth-logo-img" alt="JFit logo">
+    <img src="https://pnzydemsmqkzbaqsqrvn.supabase.co/storage/v1/object/public/app-assets/logo-dark.png" class="auth-logo-img" alt="JFit logo">
     <div class="auth-logo-name">J<span>Fit</span></div>
     <div style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;position:relative">Your fitness journey starts here</div>
   </div>
@@ -231,6 +231,7 @@ document.getElementById('root').innerHTML = `
 <div class="page-bg-full bg-workout-full" id="bg-workout" aria-hidden="true"></div>
 <div class="page-bg-full bg-nutrition-full" id="bg-nutrition" aria-hidden="true"></div>
 <div class="page-bg-full bg-body-full" id="bg-body" aria-hidden="true"></div>
+<div class="page-bg-full bg-photos-full" id="bg-photos" aria-hidden="true"></div>
 <div class="page-scroll">
 
 <!-- DASHBOARD -->
@@ -307,7 +308,7 @@ document.getElementById('root').innerHTML = `
 
 <!-- PHOTOS -->
 <div class="page" id="page-photos">
-  <div class="ph" style="position:relative;z-index:2"><h1 style="color:white;font-size:24px;font-weight:700">Progress Photos</h1><p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px">Log weekly — compare your journey</p></div>
+  <div class="ph" style="position:relative;z-index:2;padding-top:calc(var(--safe-t) + 20px)"><h1 style="color:white;font-size:24px;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.6)">Progress Photos</h1><p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:3px">Log weekly — compare your journey</p></div>
   <div class="gc wk-sel" style="margin:0 16px 16px">
     <button class="wk-nav" onclick="chgPhotoWk(-1)">‹</button>
     <div style="font-size:15px;font-weight:600" id="ph-wk-lbl">This week</div>
@@ -701,10 +702,21 @@ function renderDash(){
 
 // ─── WORKOUT ──────────────────────────────────────────────────
 function renderWorkout(){
+  const activeId=localStorage.getItem('jfit_active_program')||'ppl-elite';
+  const activeProg=ALL_PROGRAMS.find(p=>p.id===activeId)||ALL_PROGRAMS[0];
+  renderWorkoutForProgram(activeProg);
+}
+
+function renderWorkoutForProgram(prog){
   q('wk-date').textContent=new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'short'});
   const loggedToday=new Set(wkLogs.filter(l=>l.logged_at===TODAY).map(l=>l.exercise_name));
   const c=q('wk-list');c.innerHTML='';
-  PPL.days.forEach((day,di)=>{
+  // Show active program name
+  const progHeader=document.createElement('div');
+  progHeader.style.cssText='padding:0 16px 10px;font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px;position:relative;z-index:2';
+  progHeader.innerHTML=`<span style="font-size:16px">${prog.icon}</span><span style="font-weight:600;color:var(--text)">${prog.name}</span>`;
+  c.appendChild(progHeader);
+  prog.days.forEach((day,di)=>{
     const card=document.createElement('div');card.className='gc day-card';
     card.innerHTML=`
       <div class="day-hdr" onclick="togDay(${di})">
@@ -736,7 +748,9 @@ function togDay(i){openDays[i]=!openDays[i];q('db-'+i).classList.toggle('open',o
 
 // ─── LOG MODAL ────────────────────────────────────────────────
 function openLog(di,nm){
-  const day=PPL.days[di],ex=day.exercises.find(e=>e.name===nm);if(!ex)return;
+  const activeId=localStorage.getItem('jfit_active_program')||'ppl-elite';
+  const activeProg=ALL_PROGRAMS.find(p=>p.id===activeId)||ALL_PROGRAMS[0];
+  const day=activeProg.days[di],ex=day?.exercises.find(e=>e.name===nm);if(!ex)return;
   curDayIdx=di;curExName=nm;curExSets=ex.sets;
   q('lm-name').textContent=nm;q('lm-meta').textContent=`${ex.sets} sets · ${ex.reps}`;
   const prev=wkLogs.find(l=>l.exercise_name===nm),ps=prev?.sets||[];
@@ -1103,9 +1117,33 @@ async function logMeas(){
 // ─── PROGRAMS ─────────────────────────────────────────────────
 async function renderProgs(){
   const {data}=await sb.from('programs').select('*').eq('user_id',CU.id);allProgs=data||[];
+  const activeId=localStorage.getItem('jfit_active_program')||'ppl-elite';
   q('prog-list').innerHTML=`
-    <div class="gc prog-card"><div class="prog-icon" style="background:var(--accent-bg)">🏋️</div><div class="prog-info"><div class="prog-nm">JFit PPL (5-Day)</div><div class="prog-sb">Push · Pull · Legs · Push+Abs · Pull+Legs</div></div><div class="prog-badge">Active</div></div>
-    ${allProgs.map(p=>`<div class="gc prog-card"><div class="prog-icon" style="background:var(--blue-bg)">📋</div><div class="prog-info"><div class="prog-nm">${p.name}</div><div class="prog-sb">Custom program</div></div></div>`).join('')}`;
+    ${ALL_PROGRAMS.map(p=>`
+      <div class="gc prog-card" onclick="setActiveProgram('${p.id}')">
+        <div class="prog-icon" style="background:${p.color_bg};font-size:22px">${p.icon}</div>
+        <div class="prog-info">
+          <div class="prog-nm">${p.name}</div>
+          <div class="prog-sb">${p.subtitle}</div>
+          <div style="margin-top:4px">
+            <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;background:${p.color_bg};color:${p.color}">${p.level}</span>
+            <span style="font-size:10px;color:var(--muted);margin-left:6px">${p.days_per_week} days/week</span>
+          </div>
+        </div>
+        ${activeId===p.id?'<div class="prog-badge">Active</div>':''}
+      </div>`).join('')}
+    ${allProgs.length?`<div style="margin:16px 0 8px;font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em">Custom Programs</div>`:''}
+    ${allProgs.map(p=>`<div class="gc prog-card"><div class="prog-icon" style="background:var(--blue-bg)">📋</div><div class="prog-info"><div class="prog-nm">${p.name}</div><div class="prog-sb">Custom program</div></div></div>`).join('')}
+  `;
+}
+
+function setActiveProgram(id){
+  localStorage.setItem('jfit_active_program',id);
+  renderProgs();
+  // Update workout page with new program
+  const prog=ALL_PROGRAMS.find(p=>p.id===id);
+  if(prog) renderWorkoutForProgram(prog);
+  toast('Program switched! 💪');
 }
 function goToPrograms(){toggleMenu();goPage('programs',null);}
 function openCreateProg(){progDayCount=0;q('prog-nm-inp').value='';q('prog-days-cont').innerHTML='';addProgDay();q('create-prog').classList.add('open');}
@@ -1154,7 +1192,7 @@ function goPage(id,btn){
   if(btn)btn.classList.add('active');
   document.querySelector('.page-scroll')?.scrollTo(0,0);
   // Switch background image
-  const bgMap={dashboard:'bg-dashboard',workout:'bg-workout',nutrition:'bg-nutrition',body:'bg-body'};
+  const bgMap={dashboard:'bg-dashboard',workout:'bg-workout',nutrition:'bg-nutrition',body:'bg-body',photos:'bg-photos'};
   document.querySelectorAll('.page-bg-full').forEach(b=>{
     if(b.id!=='bg-auth') b.classList.remove('visible');
   });
